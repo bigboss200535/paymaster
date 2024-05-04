@@ -5,6 +5,8 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductCategoryController;
 // use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +41,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/applications', [EmployeeController::class, 'applications']); //add employee
     Route::post('storeemployee', [EmployeeController::class, 'store'])->name('employee.store'); 
     Route::get('/dashboard', [GeneralController::class, 'dashboard']); //add employee
+    Route::get('/category', [ProductCategoryController::class, 'index']); 
+    Route::get('/products', [ProductController::class, 'index']); 
+    Route::get('/addproducts', [ProductController::class, 'create']); 
     // Route::get('/payer/{PayerId}/details', [PayerController::class, 'showone'])
     // ->name('payer.details');
     Route::get('employee/{employee_id}/details', [EmployeeController::class, 'showone'])->name('employee.show');
@@ -47,7 +52,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/password-change', [ProfileController::class, 'editpassword']); //fetch users
     Route::get('/profile-details', [ProfileController::class, 'profiledetails']); //fetch users
 });
-
-
 
 require __DIR__.'/auth.php';

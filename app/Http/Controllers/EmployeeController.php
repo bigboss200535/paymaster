@@ -21,7 +21,7 @@ class EmployeeController extends Controller
         $count_active = DB::table('employee')->where('status', 'Active')->count();
         $count_inactive = DB::table('employee')->where('status', 'Inactive')->count();
         $workers = DB::table('employee')->get();
-        return view('employee.list', compact('workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive'));
+        return view('employee.index', compact('workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive'));
     }
     
     public function showone($employee_id )
@@ -54,8 +54,8 @@ class EmployeeController extends Controller
         // $workers = DB::table('employee')->where('registration_type', 'applicant')->get();
         $workers = DB::table('employee')
         // ->where('registration_type', 'applicant')
-        ->where('status', 'ACTIVE')
-        ->where('archived', 'NO')
+        ->where('status', 'Active')
+        ->where('archived', 'No')
         ->where('registration_type', 'applicant')
         ->get();
        
@@ -66,7 +66,7 @@ class EmployeeController extends Controller
     public function create()
     {
         $title = DB::table('title')->where('archived', 'No')->where('status', 'Active')->get();
-        return view('employee.add', compact('title'));
+        return view('employee.create', compact('title'));
     }
 
 

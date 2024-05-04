@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('category_id',50);
             $table->string('stocked',50);
             $table->string('expirable',50);  
-            $table->string('barcode',50);  
-            $table->string('user_id', 50);           
+            $table->string('barcode',50)->nullable(); 
+            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();
@@ -30,9 +30,9 @@ return new class extends Migration
             $table->string('archived', 100)->default('No');
             $table->date('archived_date')->nullable();
             $table->string('archived_by', 100)->nullable();
-            $table->primary('category_id');
+            $table->primary('product_id');
             // $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('category_id')->references('category_id')->on('product_category');
+            $table->foreign('category_id')->references('category_id')->on('product_category');
         });
     }
 

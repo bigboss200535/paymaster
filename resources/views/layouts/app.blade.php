@@ -22,6 +22,11 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/libs/dropzone/dropzone.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendor/libs/tagify/tagify.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/flatpickr/flatpickr.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/@form-validation/form-validation.css') }}" />
@@ -115,16 +120,22 @@
     <script src="{{ asset('vendor/libs/i18n/i18n.js') }}"></script>
     <script src="{{ asset('vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ asset('vendor/js/menu.js') }}"></script>
+    <script src="{{ asset('vendor/libs/quill/katex.js') }}"></script>
+    <script src="{{ asset('vendor/libs/quill/quill.js') }}"></script>
     <script src="{{ asset('vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
     <script src="{{ asset('vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('vendor/libs/flatpickr/flatpickr.js') }}"></script>
+    <script src="{{ asset('vendor/libs/tagify/tagify.js') }}"></script>
+    <script src="{{ asset('vendor/libs/dropzone/dropzone.js') }}"></script>
     <script src="{{ asset('vendor/libs/@form-validation/popular.js') }}"></script>
     <script src="{{ asset('vendor/libs/@form-validation/bootstrap5.js') }}"></script>
     <script src="{{ asset('vendor/libs/@form-validation/auto-focus.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
+    <script src="{{ asset('js/app-ecommerce-product-add.js') }}"></script>
     <script src="{{ asset('js/dashboards-analytics.js') }}"></script>
     <script src="{{ asset('js/app-academy-dashboard.js') }}"></script>
+    <script src="{{ asset('js/app-ecommerce-category-list.js') }}"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
     <script src="{{ asset('js/tables-datatables-basic.js') }}"></script>
@@ -139,6 +150,10 @@
 
 $(document).ready( function () {
         $('#employee_details').DataTable();
+});
+
+$(document).ready( function () {
+        $('#product_list').DataTable();
 });
 </script>
 

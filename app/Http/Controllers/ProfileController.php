@@ -16,7 +16,7 @@ class ProfileController extends Controller
     {
         // fetch all user
         $users = DB::table('users')->get();
-        return view('profile.list', compact('users'));
+        return view('profile.index', compact('users'));
     }
 
     public function create()

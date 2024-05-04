@@ -129,7 +129,13 @@
                               <td>{{ $employee->email }}</td>
                               <td>{{ $employee->staff_type }}</td>
                               <td>{{ \Carbon\Carbon::parse($employee->added_date)->format('d-m-Y') }}</td>
-                              <td><span class="badge bg-label-info me-1">Active</span></td>
+                              <td>
+                                @if($employee->status === 'Active')
+                                <span class="badge bg-label-info me-1">Active</span>
+                                @elseif ($employee->status === 'Inactive')
+                                <span class="badge bg-label-danger me-1">Inactive</span>
+                                @endif
+                              </td>
                               <td>
                                   <div class="dropdown" align="center">
                                           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

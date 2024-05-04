@@ -108,7 +108,32 @@
         </li>
       </ul>
     </li>
-
+  <!-- -----------------------------------products------------------------------------------------- -->
+  <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-store"></i>
+        <div class="text-truncate" data-i18n="Users">Products</div>
+         <!-- <span class="badge badge-center rounded-pill bg-success ms-auto">4</span> -->
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="{{ url('category') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Category</div>
+          </a>
+        </li>
+         <li class="menu-item">
+          <a href="{{ url('products') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Product</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url('addproducts') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Add Product</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+<!-- ---------------------------------------sett--------------------------------------------- -->
     <!-- -----------------------------------sales------------------------------------------------- -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">

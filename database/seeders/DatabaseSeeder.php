@@ -9,7 +9,9 @@ use Illuminate\Database\Seeder;
 use App\Models\User;
 use App\Models\Employee;
 use App\Models\Salary;
-// use Database\Factories\EmployeeFactory;
+use App\Models\Product;
+use App\Models\Category;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,6 +32,8 @@ class DatabaseSeeder extends Seeder
 
         // User::factory(20)->create();
         // Employee::factory(1000)->create();
-        Salary::factory(1000)->create();
+        // Salary::factory(1000)->create();
+        Category::factory(20)->create();
+        Product::factory(100)->create();
     }
 }

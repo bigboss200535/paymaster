@@ -192,7 +192,6 @@
                 <h4 class="text-info mb-0">21</h4>
                 <p class="mb-0">Coupons you win</p>
               </div>
-
               <p class="text-muted mb-0 text-truncate">Use coupon on next purchase</p>
             </div>
           </div>
@@ -202,7 +201,6 @@
 <!-- / customer cards -->
  <!-- Invoice table -->
  <div class="card mb-4"> 
- 
     <div style="margin:10px">
     <h4 class="card-title mb-3">Salary Summary</h4>
     </div>
@@ -222,7 +220,6 @@
           @php
              $counter = 1;
           @endphp
-
           <tbody>
           @foreach($salary_list as $list)
             <tr>
