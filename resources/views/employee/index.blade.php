@@ -96,10 +96,8 @@
                   <!-- Fixed Header -->
                   <div class="card">
                     <!-- <h5 class="card-header">List of Employees</h5> -->
-                    
                     <div class="card-datatable table-responsive">
                       <div style="margin:15px">
-                        <!-- <button type="button" class="btn btn-primary me-sm-3 me-1">Add Employee</button>   -->
                         <a class="btn btn-primary me-sm-3 me-1 pull-right" href="{{ url('/addemployee') }}">Add Employee</a>
                       </div>
                     <!-- <button type="submit" class="btn btn-primary me-sm-3 me-1">Submit</button> -->

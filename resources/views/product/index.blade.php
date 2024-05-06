@@ -7,6 +7,9 @@
                   <!-- Category List Table -->
                   <div class="card">
                     <div class="card-datatable table-responsive">
+                      <div style="margin:15px">
+                        <a class="btn btn-primary me-sm-3 me-1" href="">Add Product</a>
+                      </div>
                       <table class="datatables-category-list table border-top" id="product_list">
                         <thead>
                           <tr>

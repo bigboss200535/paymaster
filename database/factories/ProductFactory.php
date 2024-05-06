@@ -23,7 +23,7 @@ class ProductFactory extends Factory
         $category = Category::inRandomOrder()->first(); 
         return [
             'product_id' => $this->faker->uuid,
-            'product_name' => $this->faker->lastName,
+            'product_name' => $this->faker->word,
             'category_id' => $category->category_id,
             'stocked' => $this->faker->randomElement(['101', '404']),
             'expirable' => $this->faker->randomElement(['Yes', 'No']),

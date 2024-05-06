@@ -23,17 +23,18 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // UserSeeder::class,
-            // GenderSeeder::class,
-            // QuoteSeeder::class,
-            // TaxDataSeeder::class,
-            // TitleSeeder::class,
+            UserSeeder::class,
+            GenderSeeder::class,
+            QuoteSeeder::class,
+            TaxDataSeeder::class,
+            TitleSeeder::class,
+            PortfolioSeeder::class,
         ]);
 
-        // User::factory(20)->create();
-        // Employee::factory(1000)->create();
-        // Salary::factory(1000)->create();
-        Category::factory(20)->create();
+        User::factory(100)->create();
+        Employee::factory(100)->create();
+        Salary::factory(100)->create();
+        Category::factory(5)->create();
         Product::factory(100)->create();
     }
 }

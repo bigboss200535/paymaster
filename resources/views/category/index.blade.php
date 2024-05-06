@@ -30,17 +30,19 @@
                             <th class="text-lg-center">Actions</th>
                           </tr>
                         </thead>
-                        <tbody>
                             @php
                               $counter = 1;
                             @endphp
+                        <tbody>
 
                             @foreach($category as $cat)
-                          <td>{{ $counter++ }}</td>
-                          <td>{{ $cat->category_name }}</td>
-                          <td>{{ \Carbon\Carbon::parse($cat->added_date)->format('d-m-Y') }}</td>
-                          <td>{{ $cat->status }}</td>
-                          <td>Action</td>
+                          <tr>
+                            <td>{{ $counter++ }}</td>
+                            <td>{{ $cat->category_name }}</td>
+                            <td>{{ \Carbon\Carbon::parse($cat->added_date)->format('d-m-Y') }}</td>
+                            <td>{{ $cat->status }}</td>
+                            <td>Action</td>
+                          </tr>
                           @endforeach
                         </tbody>
                         <tfoot>

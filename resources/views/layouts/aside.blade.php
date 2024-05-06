@@ -131,6 +131,11 @@
             <div class="text-truncate" data-i18n="List">Add Product</div>
           </a>
         </li>
+        <li class="menu-item">
+         <a href="" class="menu-link">
+          <div class="text-truncate" data-i18n="list">Price setup</div>
+         </a>
+        </li>
       </ul>
     </li>
 <!-- ---------------------------------------sett--------------------------------------------- -->

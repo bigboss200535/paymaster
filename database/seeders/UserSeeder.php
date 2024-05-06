@@ -28,32 +28,11 @@ class UserSeeder extends Seeder
             'role' => 'Developer',
             'permission' => 'ontheway',
             'image' => $faker->imageUrl(),
-            'added_id' => '',
+            'added_id' => '1',
             'added_date' => now(),
             'status' => 'Active',
             'archived' => 'No',
         ]);
 
-        // for ($i = 0; $i < 2; $i++){
-
-        //     DB::table('users')->insert([
-        //         'id' => $faker->regexify('[A-Z]{5}[0-4]{3}'),
-        //         'username' => $faker->userName,
-        //         'password' =>  Hash::make('@Mohammed200535'),
-        //         'firstname' => $faker->firstName,
-        //         'email' => $faker->email,
-        //         'othername' => $faker->lastName,
-        //         'telephone' => $faker->phoneNumber,
-        //         'gender' => $faker->randomElement(['Male', 'Female']),
-        //         'mode' => $faker->randomElement(['New', 'Old']),
-        //         'role' => $faker->randomElement(['Sales', 'Accounts', 'Accountant', 'HR', 'IT', 'Developer']),
-        //         'permission' => $faker->sentence,
-        //         'image' => $faker->imageUrl(),
-        //         'added_id' => $faker->uuid,
-        //         'added_date' => $faker->dateTimeThisMonth(),
-        //         'status' => $faker->randomElement(['Active', 'Inactive']),
-        //         'archived' => $faker->randomElement(['Yes', 'No']),
-        //     ]);
-        // }
     }
 }

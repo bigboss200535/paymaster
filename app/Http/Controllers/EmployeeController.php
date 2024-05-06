@@ -32,11 +32,9 @@ class EmployeeController extends Controller
         ->orderBy('employee.added_date', 'asc') 
         ->first();
 
-        $salary_list = Employee::rightJoin('salary_account', 'salary_account.employee_id', '=', 'employee.employee_id')
+        $salary_list = Employee::join('salary_account', 'salary_account.employee_id', '=', 'employee.employee_id')
         ->where('salary_account.employee_id', $employee_id)
         ->where('salary_account.archived', 'No')
-        // ->where('salary_account.status', 'Active')
-        // ->where('salary_account.archived', 'No')
         ->select('salary_account.*', 'employee.employee_id as emp_id')
         ->orderBy('salary_account.added_date', 'asc') 
         ->get();
@@ -64,9 +62,9 @@ class EmployeeController extends Controller
 
 
     public function create()
-    {
+    {   $gender = DB::table('gender')->where('archived', 'No')->where('status', 'Active')->get();
         $title = DB::table('title')->where('archived', 'No')->where('status', 'Active')->get();
-        return view('employee.create', compact('title'));
+        return view('employee.create', compact('title', 'gender'));
     }
 
 

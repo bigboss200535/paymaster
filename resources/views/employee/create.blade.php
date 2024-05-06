@@ -68,7 +68,9 @@
                                         ><i class="bx bx-user"></i></span>
                                       <select class="form-select" name="gender" id="gender">
                                         <option disabled selected>-select-</option>
-                                       
+                                        @foreach($gender as $g)                                        
+                                        <option value="{{ $g->gender }}">{{ $g->gender }}</option>
+                                        @endforeach
                                       </select>
                                     </div>
                                 </div>
