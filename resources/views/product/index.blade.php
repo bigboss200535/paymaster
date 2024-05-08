@@ -59,7 +59,7 @@
                                           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
                                               <i class="bx bx-dots-vertical-rounded"></i>
                                           </button>
-                                              <div class="dropdown-menu">
+                                            <div class="dropdown-menu">
                                                   <a class="dropdown-item" href="">
                                                     <i class="bx bx-edit-alt me-1"></i> More
                                                   </a>
@@ -67,8 +67,7 @@
                                                       <i class="bx bx-trash me-1"></i> Delete
                                                   </a>
                                             </div>
-                                  </div>  
-
+                                </div>  
                               </td>
                           </tr>
                             @endforeach
