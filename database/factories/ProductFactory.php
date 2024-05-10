@@ -21,6 +21,7 @@ class ProductFactory extends Factory
     {
         $user = User::inRandomOrder()->first(); 
         $category = Category::inRandomOrder()->first(); 
+        
         return [
             'product_id' => $this->faker->uuid,
             'product_name' => $this->faker->word,

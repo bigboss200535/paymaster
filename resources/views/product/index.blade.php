@@ -4,7 +4,6 @@
                     <span class="text-muted fw-light">Product/</span> List
                   </h4>
                   <div class="app-ecommerce-category">
-                  <!-- Category List Table -->
                   <div class="card">
                     <div class="card-datatable table-responsive">
                       <div style="margin:15px">

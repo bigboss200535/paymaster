@@ -36,5 +36,6 @@ class DatabaseSeeder extends Seeder
         Salary::factory(100)->create();
         Category::factory(5)->create();
         Product::factory(100)->create();
+        
     }
 }

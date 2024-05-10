@@ -18,6 +18,7 @@ class CategoryFactory extends Factory
     public function definition()
     {
         $user = User::inRandomOrder()->first(); 
+        
         return [
             'category_id' => $this->faker->uuid,
             'category_name' => $this->faker->lastName,

@@ -22,9 +22,9 @@ return new class extends Migration
             $table->float('distribution_price');
             $table->float('wholesale_price');  
             $table->float('retail_price');  
-            $table->date('effective_date');  
-            $table->date('end_date');  
-            $table->string('status_flag');  
+            $table->date('effective_date')->nullable();  
+            $table->date('end_date')->nullable();  
+            $table->string('status_flag')->nullable();  
             $table->string('user_id', 50);           
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
