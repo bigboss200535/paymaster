@@ -69,6 +69,12 @@ class GeneralController extends Controller
                 return 'Welcome';
             }
     }
+    public function sendotp(Request $request)
+    {
+        $telephone = $request->input('telephone');
+        $otp = rand(100000, 999999);
+        
 
+    }
 
 }
