@@ -41,7 +41,21 @@
                             <td>{{ $cat->category_name }}</td>
                             <td>{{ \Carbon\Carbon::parse($cat->added_date)->format('d-m-Y') }}</td>
                             <td>{{ $cat->status }}</td>
-                            <td>Action</td>
+                            <td>
+                            <div class="dropdown" align="center">
+                                          <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                              <i class="bx bx-dots-vertical-rounded"></i>
+                                          </button>
+                                            <div class="dropdown-menu">
+                                                  <a class="dropdown-item" href="">
+                                                    <i class="bx bx-edit-alt me-1"></i> More
+                                                  </a>
+                                                  <a class="dropdown-item" href="javascript:void(0);">
+                                                      <i class="bx bx-trash me-1"></i> Delete
+                                                  </a>
+                                            </div>
+                                </div>  
+                            </td>
                           </tr>
                           @endforeach
                         </tbody>

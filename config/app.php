@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'PoS360'),
+    'name' => env('APP_NAME', 'PoS360 | Everywhere, Anywhere'),
 
     /*
     |--------------------------------------------------------------------------

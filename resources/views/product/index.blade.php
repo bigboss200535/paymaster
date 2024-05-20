@@ -7,7 +7,7 @@
                   <div class="card">
                     <div class="card-datatable table-responsive">
                       <div style="margin:15px">
-                        <a class="btn btn-primary me-sm-3 me-1" href="">Add Product</a>
+                        <a class="btn btn-primary me-sm-3 me-1" href="">Add New Product</a>
                       </div>
                       <table class="datatables-category-list table border-top" id="product_list">
                         <thead>
@@ -31,7 +31,7 @@
                               <td>{{ $counter++ }}</td>
                               <td>{{ $product->product_name }}</td>
                               <td>{{ $product->category }}</td>
-                              <td>{{ $product->product_name }}</td>
+                              <td>{{ $product->barcode }}</td>
                               <td class="text-nowrap text-sm-end" align="left">
                                 @if($product->stocked === '101')
                                 <span class="badge bg-label-info me-1">Yes</span>

@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <meta name="description" content="" />
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title>{{ config('app.name', 'Laravel') }} | Anywhere, Everywhere</title>
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/favicon.ico') }}" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -41,6 +41,8 @@
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
     </head>
     <style>
             .preloader-container {
@@ -142,7 +144,6 @@
     <script src="{{ asset('js/form-wizard-numbered.js') }}"></script>
     </body>
 </html>
-
 <script type="text/javascript">
      $(document).ready( function () {
         $('#users_list').DataTable();
@@ -376,4 +377,7 @@ $(document).ready( function () {
       function isValidDate(date) {
           return !isNaN(date.getTime());
       }
+
+$('.product_search').select2();
  </script>
+  

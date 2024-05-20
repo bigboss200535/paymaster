@@ -126,20 +126,45 @@
             <div class="text-truncate" data-i18n="List">Product</div>
           </a>
         </li>
-        <li class="menu-item">
+        <!-- <li class="menu-item">
           <a href="{{ url('addproducts') }}" class="menu-link">
             <div class="text-truncate" data-i18n="List">Add Product</div>
           </a>
-        </li>
+        </li> -->
         <li class="menu-item">
+         <a href="{{ url('prices') }}" class="menu-link">
+          <div class="text-truncate" data-i18n="list">Pricing</div>
+         </a>
+        </li>
+        <!-- <li class="menu-item">
          <a href="" class="menu-link">
           <div class="text-truncate" data-i18n="list">Price setup</div>
          </a>
-        </li>
+        </li> -->
       </ul>
     </li>
 <!-- ---------------------------------------sett--------------------------------------------- -->
-    <!-- -----------------------------------sales------------------------------------------------- -->
+ <!-- -----------------------------------sales------------------------------------------------- -->
+ <li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-layout"></i>
+        <div class="text-truncate" data-i18n="Users">Inventory</div>
+         <!-- <span class="badge badge-center rounded-pill bg-success ms-auto">4</span> -->
+      </a>
+      <ul class="menu-sub">
+        <li class="menu-item">
+          <a href="/addstudent" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Purchase Order</div>
+          </a>
+        </li>
+         <li class="menu-item">
+          <a href="/employees" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Requisitions</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+<!-- -----------------------------------sales------------------------------------------------- -->
     <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-cart-alt"></i>
@@ -153,53 +178,30 @@
           </a>
         </li> -->
          <li class="menu-item">
-          <a href="/employees" class="menu-link">
-            <div class="text-truncate" data-i18n="List">Employee List</div>
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Sales</div>
           </a>
         </li>
       </ul>
     </li>
+   
 <!-- ---------------------------------------sett--------------------------------------------- -->
-<li class="menu-item">
+<!-- <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-cart-alt"></i>
         <div class="text-truncate" data-i18n="Users">Salaries</div>
-         <!-- <span class="badge badge-center rounded-pill bg-success ms-auto">4</span> -->
+        
       </a>
       <ul class="menu-sub">
-        <!-- <li class="menu-item">
-          <a href="/addstudent" class="menu-link">
-            <div class="text-truncate" data-i18n="List">Add Employee</div>
-          </a>
-        </li> -->
+       
          <li class="menu-item">
           <a href="/salaries" class="menu-link">
             <div class="text-truncate" data-i18n="List">Salary List</div>
           </a>
         </li>
       </ul>
-    </li>
+    </li> -->
 <!-- --------------------------------------/-salaries--------------------------------------------- -->
-<!-- ---------------------------------------salaries--------------------------------------------- -->
-<li class="menu-item">
-      <a href="javascript:void(0);" class="menu-link menu-toggle">
-        <i class="menu-icon tf-icons bx bx-cart-alt"></i>
-        <div class="text-truncate" data-i18n="Users">Salaries</div>
-         <!-- <span class="badge badge-center rounded-pill bg-success ms-auto">4</span> -->
-      </a>
-      <ul class="menu-sub">
-        <!-- <li class="menu-item">
-          <a href="/addstudent" class="menu-link">
-            <div class="text-truncate" data-i18n="List">Add Employee</div>
-          </a>
-        </li> -->
-         <li class="menu-item">
-          <a href="/salaries" class="menu-link">
-            <div class="text-truncate" data-i18n="List">Salary List</div>
-          </a>
-        </li>
-      </ul>
-    </li>
 <!-- --------------------------------------/-salaries--------------------------------------------- -->
     <li class="menu-header small text-uppercase"><span class="menu-header-text" data-i18n="Components">System Setup</span></li>
     <!-- Cards -->

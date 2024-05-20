@@ -11,6 +11,7 @@ use App\Models\Employee;
 use App\Models\Salary;
 use App\Models\Product;
 use App\Models\Category;
+use App\Models\ProductPrice;
 
 
 class DatabaseSeeder extends Seeder
@@ -32,10 +33,10 @@ class DatabaseSeeder extends Seeder
         ]);
 
         User::factory(100)->create();
-        Employee::factory(100)->create();
-        Salary::factory(100)->create();
-        Category::factory(5)->create();
-        Product::factory(100)->create();
-        
+        Employee::factory(50)->create();
+        Salary::factory(50)->create();
+        Category::factory(3)->create();
+        Product::factory(50)->create();
+        ProductPrice::factory(10)->create();
     }
 }

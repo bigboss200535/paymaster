@@ -7,6 +7,7 @@ use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\GeneralController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductCategoryController;
+use App\Http\Controllers\SalesController;
 // use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
 
@@ -43,6 +44,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [GeneralController::class, 'dashboard']); //add employee
     Route::get('/category', [ProductCategoryController::class, 'index']); 
     Route::get('/products', [ProductController::class, 'index']); 
+    Route::get('/prices', [ProductController::class, 'prices']); 
+    Route::get('/sales', [SalesController::class, 'index']); 
     Route::get('/addproducts', [ProductController::class, 'create']); 
     // Route::get('/payer/{PayerId}/details', [PayerController::class, 'showone'])
     // ->name('payer.details');
