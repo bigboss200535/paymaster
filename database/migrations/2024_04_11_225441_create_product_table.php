@@ -20,7 +20,8 @@ return new class extends Migration
             $table->string('stocked',50);
             $table->string('expirable',50);  
             $table->string('barcode',50)->nullable(); 
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();

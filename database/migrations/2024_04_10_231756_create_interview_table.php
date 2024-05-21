@@ -29,7 +29,8 @@ return new class extends Migration
             $table->string('employability_reason', 250)->nullable();
             $table->string('religion', 50)->nullable();
             $table->string('gh_card', 50)->nullable();
-            $table->string('user_id', 50);
+            // $table->string('user_id', 50);
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->string('file_number', 50)->nullable();
             $table->string('portfolio', 50)->nullable();
             $table->string('added_id', 50)->nullable();

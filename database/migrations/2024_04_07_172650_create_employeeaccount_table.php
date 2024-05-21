@@ -20,7 +20,8 @@ return new class extends Migration
             $table->decimal('ssnit_a', 10,2);
             $table->decimal('ssnit_b', 10,2);
             $table->decimal('ssnit_c', 10,2);
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();
             $table->string('updated_by', 100)->nullable();

@@ -18,7 +18,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            // 'id' => $this->faker->regexify('[A-Z]{5}[0-4]{3}'),
+            'id' => Str::uuid(),
             'username' => $this->faker->userName,
             'firstname' => $this->faker->firstName,
             'othername' => $this->faker->lastName,

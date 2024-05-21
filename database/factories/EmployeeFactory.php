@@ -35,7 +35,7 @@ class EmployeeFactory extends Factory
             'staff_type' => $this->faker->randomElement(['Locum', 'Permanent']),
             'registration_type' => $this->faker->randomElement(['applicant', 'interviewed', 'hired']),
             'verified' => $this->faker->randomElement(['Yes', 'No']),
-            'user_id' => '1',
+            'user_id' => $user_id->id,
             'added_id' => $user_id->id,
             'added_date' => $this->faker->dateTimeThisMonth(),
             'status' => $this->faker->randomElement(['Active', 'Inactive']),

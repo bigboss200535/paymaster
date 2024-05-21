@@ -36,7 +36,8 @@ return new class extends Migration
             $table->string('address', 150)->nullable();
             $table->string('region', 50)->nullable();
             $table->string('gh_card', 50)->nullable();
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
             $table->string('application_process', 50)->nullable();
             $table->string('registration_type', 50)->nullable();
             $table->string('file_number', 50)->nullable();

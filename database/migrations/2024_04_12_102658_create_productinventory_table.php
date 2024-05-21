@@ -22,8 +22,9 @@ return new class extends Migration
             $table->date('expirydate');  
             $table->float('stock_quantity',50);  
             $table->float('reorder_level',50);  
-            $table->string('status_flag');  
-            $table->string('user_id', 50);           
+            $table->string('status_flag');
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->string('user_id', 50);           
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();

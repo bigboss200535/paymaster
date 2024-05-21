@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('notification', function (Blueprint $table) {
             $table->string('id');
             $table->text('message', 150);
-            $table->string('user_id', 50);
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->string('user_id', 50);
             $table->string('read_status', 50)->default('No');
             $table->date('read_date')->nullable();
             $table->string('reader_id', 50);

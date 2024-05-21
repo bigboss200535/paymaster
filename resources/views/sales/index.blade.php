@@ -62,10 +62,10 @@
         <div class="card-body">
           <div class="mb-3 col ecommerce-select2-dropdown">
             <label class="form-label mb-1" for="vendor">
-              Expirable
+              Customer
             </label>
-            <select id="vendor" class="select2 form-select" data-placeholder="Select Vendor">
-              <option value="" disabled selected>-Select-</option>
+            <select id="vendor" class="select2 form-select customer_search" data-placeholder="Select Vendor">
+              <option value="" disabled selected>-Enter Customer-</option>
               <option value="men-clothing">Yes</option>
               <option value="kid-clothing">No</option>
             </select>
@@ -73,13 +73,27 @@
           <!-- Category -->
           <div class="mb-3 col ecommerce-select2-dropdown">
             <label class="form-label mb-1 d-flex justify-content-between align-items-center" for="category-org">
-              <span>Status</span>
+              <span>Payment Mode</span>
             </label>
             <select id="category-org" class="select2 form-select" data-placeholder="Select Category">
-              <option disabled selected>-Select-</option>
-              <option value="Active">Publish</option>
+              <!-- <option disabled selected>-Select-</option> -->
+              <option value="Cash" selected>Cash</option>
+              <option value="Telecel">Telecel Cash</option>
+              <option value="Mtn Momo">Mtn Momo</option>
             </select>
           </div>
+          <div class="mb-3 col ecommerce-select2-dropdown">
+            <label class="form-label mb-1 d-flex justify-content-between align-items-center" for="category-org">
+              <span>Payment Mode</span>
+            </label>
+            <select id="category-org" class="select2 form-select" data-placeholder="Select Category">
+              <!-- <option disabled selected>-Select-</option> -->
+              <option value="Cash" selected>Cash</option>
+              <option value="Telecel">Telecel Cash</option>
+              <option value="Mtn Momo">Mtn Momo</option>
+            </select>
+          </div>
+          
         </div>
       </div>
     </div>

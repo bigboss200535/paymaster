@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('designation_id',50);
             $table->string('department_id',150);
             $table->string('designation',150);
-            $table->string('user_id',50);        
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->string('user_id',50);        
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();

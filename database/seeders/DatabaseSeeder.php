@@ -24,12 +24,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            UserSeeder::class,
-            GenderSeeder::class,
-            QuoteSeeder::class,
-            TaxDataSeeder::class,
-            TitleSeeder::class,
-            PortfolioSeeder::class,
+            // UserSeeder::class,
+            // GenderSeeder::class,
+            // QuoteSeeder::class,
+            // TaxDataSeeder::class,
+            // TitleSeeder::class,
+            // PortfolioSeeder::class,
         ]);
 
         User::factory(100)->create();

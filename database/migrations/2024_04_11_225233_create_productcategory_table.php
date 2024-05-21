@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('product_category', function (Blueprint $table) {
             $table->string('category_id',50);
             $table->string('category_name',50);
-            $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();

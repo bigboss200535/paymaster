@@ -25,7 +25,8 @@ return new class extends Migration
             $table->date('effective_date')->nullable();  
             $table->date('end_date')->nullable();  
             $table->string('status_flag')->nullable();  
-            $table->string('user_id', 50);           
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
+            // $table->string('user_id', 50);           
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();

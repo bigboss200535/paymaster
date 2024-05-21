@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
             $table->string('firstname', 150);
             $table->string('othername', 150);
             $table->string('fullname')->virtualAs("CONCAT(othername, ' ', firstname)");

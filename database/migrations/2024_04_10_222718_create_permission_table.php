@@ -16,7 +16,8 @@ return new class extends Migration
         Schema::create('user_permissions', function (Blueprint $table) {
             $table->string('id');
             $table->json('permission');
-            $table->string('user_id', 50);
+            // $table->string('user_id', 50);
+            $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->string('added_id', 50)->nullable();
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();
