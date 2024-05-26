@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/css/pages/page-profile.css') }}" />
     <!-- <script src="{{ asset('vendor/js/helpers.js') }}"></script> -->
     <!-- <script src="{{ asset('js/config.js') }}"></script> -->
+    <link rel="stylesheet" href="{{ asset('vendor/libs/spinkit/spinkit.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
     <script src="{{ asset('vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('vendor/js/template-customizer.js') }}"></script>
@@ -142,6 +143,7 @@
     <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
     <script src="{{ asset('js/tables-datatables-basic.js') }}"></script>
     <script src="{{ asset('js/form-wizard-numbered.js') }}"></script>
+    <script src="{{ asset('vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
     </body>
 </html>
 <script type="text/javascript">
@@ -160,6 +162,7 @@ $(document).ready( function () {
 
 <script type="text/javascript">
    $(document).ready(function() {
+    $('.product_search').select2();
     $('#employee_add').submit(function(e) {
         e.preventDefault(); 
 
@@ -378,6 +381,12 @@ $(document).ready( function () {
           return !isNaN(date.getTime());
       }
 
-$('.product_search').select2();
+
+ </script>
+ <script>
+//     $(document).ready(function() {
+   
+// });
+    // $('.').select2();
  </script>
   

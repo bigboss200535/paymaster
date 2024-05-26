@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/category', [ProductCategoryController::class, 'index']); 
     Route::get('/products', [ProductController::class, 'index']); 
     Route::get('/prices', [ProductController::class, 'prices']); 
+    Route::get('/purchases', [ProductController::class, 'purchases']); 
     Route::get('/sales', [SalesController::class, 'index']); 
     Route::get('/addproducts', [ProductController::class, 'create']); 
     // Route::get('/payer/{PayerId}/details', [PayerController::class, 'showone'])

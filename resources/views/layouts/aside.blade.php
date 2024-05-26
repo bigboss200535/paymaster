@@ -153,7 +153,7 @@
       </a>
       <ul class="menu-sub">
         <li class="menu-item">
-          <a href="/addstudent" class="menu-link">
+          <a href="{{url('purchases') }}" class="menu-link">
             <div class="text-truncate" data-i18n="List">Purchase Order</div>
           </a>
         </li>

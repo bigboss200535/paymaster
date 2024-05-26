@@ -7,9 +7,9 @@
 <div class="app-ecommerce">
   <div class="d-flex flex-wrap justify-content-between align-items-center mb-3">
     <div class="d-flex align-content-center flex-wrap gap-3">
-      <button class="btn btn-label-secondary">Discard</button>
+      <!-- <button class="btn btn-label-secondary">Discard</button>
       <button class="btn btn-label-primary">Save draft</button>
-      <button type="submit" class="btn btn-primary">Publish product</button>
+      <button type="submit" class="btn btn-primary">Publish product</button> -->
     </div>
   </div>
   <div class="row">
@@ -22,7 +22,7 @@
                   <select class="product_search form-control" name="product_search" id="product_search">
                       <option selected disabled>-Scan Barcode or Enter Item-</option>
                           @foreach($products as $product)                                        
-                              <option value="{{ $product->product_id }}">{{ $product->product_and_price }}</option>
+                              <option value="{{ $product->product_id }}">{{ $product->product_name }}</option>
                           @endforeach
                   </select>
           </div>
