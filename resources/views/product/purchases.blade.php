@@ -21,8 +21,8 @@
             <label class="form-label" for="ecommerce-product-name">Search Product</label>
                   <select class="product_search form-control" name="product_search" id="product_search">
                       <option selected disabled>-Scan Barcode or Enter Item-</option>
-                          @foreach($products as $product)                                        
-                              <option value="{{ $product->product_id }}">{{ $product->product_name }}</option>
+                          @foreach($product as $products)                                        
+                              <option value="{{ $products->product_id }}">{{ $products->product_and_price }}</option>
                           @endforeach
                   </select>
           </div>

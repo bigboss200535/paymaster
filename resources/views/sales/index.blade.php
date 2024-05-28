@@ -1,5 +1,5 @@
     <x-app-layout>
-    @include ('layouts.preloader')
+    <!-- @include ('layouts.preloader') -->
       <div class="container-xxl flex-grow-1 container-p-y">    
                   <!-- <h4 class="py-3 mb-4">
                     <span class="text-muted fw-light">Product Category/</span> List
@@ -20,9 +20,9 @@
           <div class="mb-3">
             <label class="form-label" for="ecommerce-product-name">Search Product</label>
                   <select class="product_search form-control" name="product_search" id="product_search">
-                      <option selected disabled>-Scan Barcode or Enter Item-</option>
-                          @foreach($products as $product)                                        
-                              <option value="{{ $product->product_id }}">{{ $product->product_and_price }}</option>
+                      <option selected disabled>-Enter Item-</option>
+                          @foreach($product as $products)                                        
+                              <option value="{{ $products->product_id }}">{{ $products->product_and_price }}</option>
                           @endforeach
                   </select>
           </div>

@@ -12,6 +12,7 @@ use App\Models\Salary;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductPrice;
+use App\Models\Store;
 
 
 class DatabaseSeeder extends Seeder
@@ -24,11 +25,12 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            // UserSeeder::class,
-            // GenderSeeder::class,
-            // QuoteSeeder::class,
+            UserSeeder::class,
+            GenderSeeder::class,
+            QuoteSeeder::class,
             // TaxDataSeeder::class,
-            // TitleSeeder::class,
+            TitleSeeder::class,
+             StoreSeeder::class,
             // PortfolioSeeder::class,
         ]);
 
@@ -36,7 +38,7 @@ class DatabaseSeeder extends Seeder
         Employee::factory(50)->create();
         Salary::factory(50)->create();
         Category::factory(3)->create();
-        Product::factory(50)->create();
+        Product::factory(10)->create();
         ProductPrice::factory(10)->create();
     }
 }
