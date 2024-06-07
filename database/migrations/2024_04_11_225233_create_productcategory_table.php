@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_category', function (Blueprint $table) {
-            $table->string('category_id',50);
+            $table->id('category_id');
             $table->string('category_name',50);
             $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('archived', 100)->default('No');
             $table->date('archived_date')->nullable();
             $table->string('archived_by', 100)->nullable();
-            $table->primary('category_id');
+            // $table->primary('category_id');
             // $table->foreign('user_id')->references('id')->on('users');
         });
     }

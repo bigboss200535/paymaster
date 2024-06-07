@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
  */
@@ -18,8 +18,8 @@ class EmployeeFactory extends Factory
     public function definition()
     {
         $user = User::inRandomOrder()->first(); 
-        $user_id = DB::table('users')->inRandomOrder()->first();
-
+        // $user_id = DB::table('users')->inRandomOrder()->first();
+        $user_id = User::inRandomOrder()->first(); 
         return [
             'employee_id' => $this->faker->uuid,
             'title' => $this->faker->randomElement(['Mr', 'Miss', 'Dr' , 'Mrs']),

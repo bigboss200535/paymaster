@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\User;
 use App\Models\Category;
@@ -26,7 +25,7 @@ class ProductFactory extends Factory
             'product_id' => $this->faker->uuid,
             'product_name' => $this->faker->word,
             'category_id' => $category->category_id,
-            'stocked' => $this->faker->randomElement(['101', '404']),
+            'stocked' => $this->faker->randomElement(['101', '404']), // 101 and 404 for stocked item and non-stocked items 
             'expirable' => $this->faker->randomElement(['Yes', 'No']),
             'barcode' => $this->faker->randomNumber(5, true),
             'user_id' => $user->id,

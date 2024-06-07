@@ -36,7 +36,7 @@ return new class extends Migration
             $table->string('archived_by', 100)->nullable();
             $table->primary('pi_id');
             // $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('product_id')->references('product_id')->on('product');
+            $table->foreign('product_id')->references('product_id')->on('product');
         });
     }
 

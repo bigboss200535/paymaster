@@ -31,10 +31,12 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/@form-validation/form-validation.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/css/pages/page-profile.css') }}" />
-    <!-- <script src="{{ asset('vendor/js/helpers.js') }}"></script> -->
-    <!-- <script src="{{ asset('js/config.js') }}"></script> -->
     <link rel="stylesheet" href="{{ asset('vendor/libs/spinkit/spinkit.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
+    
+    <!-- Livewire Styles -->
+     @livewireStyles
+
     <script src="{{ asset('vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('vendor/js/template-customizer.js') }}"></script>
     <script src="{{ asset('js/config.js') }}"></script>
@@ -146,6 +148,10 @@
     <script src="{{ asset('vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
     </body>
 </html>
+
+ <!-- Livewire Scripts -->
+ @livewireScripts 
+ 
 <script type="text/javascript">
      $(document).ready( function () {
         $('#users_list').DataTable();

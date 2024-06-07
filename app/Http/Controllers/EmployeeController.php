@@ -24,7 +24,7 @@ class EmployeeController extends Controller
         return view('employee.index', compact('workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive'));
     }
     
-    public function showone($employee_id )
+    public function show($employee_id )
     {
         $staff = Employee::rightJoin('users', 'users.id', '=', 'employee.user_id')
         ->where('employee.employee_id', $employee_id)

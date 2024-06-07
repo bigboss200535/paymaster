@@ -14,7 +14,6 @@ class Gender extends Model
     public $timestamps = false;
     
     protected $fillable = [
-        //    'id',
             'gender_id',
             'gender',
             // 'added_id',

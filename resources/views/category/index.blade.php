@@ -40,7 +40,13 @@
                             <td>{{ $counter++ }}</td>
                             <td>{{ $cat->category_name }}</td>
                             <td>{{ \Carbon\Carbon::parse($cat->added_date)->format('d-m-Y') }}</td>
-                            <td>{{ $cat->status }}</td>
+                            <td>
+                                @if($cat->status === 'Active')
+                                <span class="badge bg-label-info me-1">Active</span>
+                                  @elseif ($cat->status === 'Inactive')
+                                <span class="badge bg-label-danger me-1">Inactive</span>
+                                @endif
+                            </td>
                             <td>
                             <div class="dropdown" align="center">
                                           <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

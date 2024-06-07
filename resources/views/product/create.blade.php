@@ -29,6 +29,7 @@
           <h5 class="card-tile mb-0">Product information</h5>
         </div>
         <div class="card-body">
+          <form action="" enctype="multipart/form-data" method="post"> 
           <div class="mb-3">
             <label class="form-label" for="ecommerce-product-name">Product Name</label>
             <input type="text" class="form-control" id="ecommerce-product-name" placeholder="Product Name" name="productTitle" aria-label="Product title">
@@ -47,29 +48,17 @@
                   <option value="{{ $categories->category_id }}">{{ $categories->category_name }}</option>
                  @endforeach
             </select>
-              <!-- <input type="number" class="form-control" id="ecommerce-product-sku" placeholder="SKU" name="productSku" aria-label="Product SKU"> -->
             </div>
             <div class="col"><label class="form-label" for="ecommerce-product-barcode">Barcode</label>
               <input type="text" class="form-control" id="ecommerce-product-barcode" placeholder="0123-4567" name="productBarcode" aria-label="Product barcode">
             </div>
           </div>
-          <!-- Description -->
-          
         </div>
       </div>
-     
-      <!-- Inventory -->
     </div>
-    <!-- /Second column -->
-
-    <!-- Second column -->
     <div class="col-12 col-lg-4">
-    
-      <!-- Organize Card -->
       <div class="card mb-4">
-        
         <div class="card-body">
-          <!-- Vendor -->
           <div class="mb-3 col ecommerce-select2-dropdown">
             <label class="form-label mb-1" for="vendor">
               Expirable
@@ -80,7 +69,6 @@
               <option value="kid-clothing">No</option>
             </select>
           </div>
-
           <div class="mb-3 col ecommerce-select2-dropdown">
             <label class="form-label mb-1" for="vendor">
               Stockable
@@ -91,7 +79,6 @@
               <option value="kid-clothing">No</option>
             </select>
           </div>
-          <!-- Category -->
           <div class="mb-3 col ecommerce-select2-dropdown">
             <label class="form-label mb-1 d-flex justify-content-between align-items-center" for="category-org">
               <span>Status</span>
@@ -100,19 +87,16 @@
               <option disabled selected>-Select-</option>
               <option value="Active">Publish</option>
               <option value="Inactive">Disable</option>
-              <!-- <option value="Electronics">Electronics</option> -->
             </select>
           </div>
         </div>
       </div>
-      <!-- /Organize Card -->
     </div>
     <div class="d-flex align-content-center flex-wrap gap-3">
       <button type="reset" class="btn btn-label-secondary">clear</button>
-      <!-- <button class="btn btn-label-primary">Save draft</button> -->
       <button type="submit" class="btn btn-primary">Submit</button>
     </div>
-    <!-- /Second column -->
+  </form>
   </div>
 </div>
 </div>           

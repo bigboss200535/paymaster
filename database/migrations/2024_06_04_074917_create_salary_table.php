@@ -13,15 +13,19 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('supplier', function (Blueprint $table) {
-            $table->string('supplier_id',50);
-            $table->string('supplier',150);
-            $table->string('address',150);
-            $table->string('email',150);
-            $table->string('telephone',150);
-            $table->string('location',200);
-            $table->string('user_id', 50);           
-            $table->string('added_id', 50)->nullable();
+        Schema::create('salary', function (Blueprint $table) {
+            $table->string('employee_id',50);
+            $table->string('month',50); //1, 2,3,4,5,6,7,8,9,10,11,12 for months
+            $table->string('year',50);
+            $table->decimal('salary', 10,2);
+            $table->decimal('ssnit_a', 10,2);
+            $table->decimal('ssnit_b', 10,2);
+            $table->decimal('ssnit_c', 10,2);
+            $table->decimal('welfare_deduction', 10,2)->default('0');
+            $table->decimal('medical_allowance', 10,2)->default('0');
+            $table->decimal('transport_allowance', 10,2)->default('0');
+            $table->decimal('other_allowance', 10,2)->default('0');
+             $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->string('added_by', 100)->nullable();
             $table->date('added_date')->nullable();
             $table->string('updated_by', 100)->nullable();
@@ -30,9 +34,6 @@ return new class extends Migration
             $table->string('archived', 100)->default('No');
             $table->date('archived_date')->nullable();
             $table->string('archived_by', 100)->nullable();
-            $table->primary('supplier_id');
-            $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
         });
     }
 
@@ -43,6 +44,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supplier');
+        Schema::dropIfExists('salary');
     }
 };

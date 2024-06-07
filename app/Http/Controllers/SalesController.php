@@ -14,12 +14,22 @@ class SalesController extends Controller
     {  
         $product = ProductPrice::rightJoin('product', 'product.product_id', '=', 'product_price.product_id')
         ->rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id') // Join with product_category table
-        ->rightJoin('product_stock', 'product_category.category_id', '=', 'product.category_id') 
+        ->rightJoin('product_stock', 'product_stock.product_id', '=', 'product_price.product_id') 
         ->where('product_price.archived', 'No')
-        ->select('product.product_id', 'product_price.retail_price','product.product_name','product.added_date',
-        'product.status', 'product.barcode' ,'product.stocked','product.expirable',
-        'product_category.category_id as pro_id', 'product_category.category_name as category',
-            DB::raw("CONCAT(product.product_name, ' | ', product_price.retail_price) as product_and_price")
+        ->select('product.product_id', 
+        'product.product_name',
+        'product_category.category_name as category',
+        'product_stock.stock_quantity', 
+        'product.barcode',
+        'product_price.retail_price',
+        'product_price.wholesale_price',
+        'product_price.cost_price',
+        'product_price.status_flag',
+        'product_stock.status', 
+       
+        // 'product.stocked',
+        // 'product.expirable',
+            DB::raw("CONCAT(product.product_name, ' | ', product_price.retail_price, ' | ', product_stock.stock_quantity ) as product_and_price")
         )
         ->orderBy('product_price.added_date', 'asc') 
         ->get();

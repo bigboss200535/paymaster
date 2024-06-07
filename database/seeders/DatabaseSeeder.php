@@ -12,7 +12,8 @@ use App\Models\Salary;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\ProductPrice;
-use App\Models\Store;
+use App\Models\ProductStock;
+// use App\Models\Store;
 
 
 class DatabaseSeeder extends Seeder
@@ -30,15 +31,16 @@ class DatabaseSeeder extends Seeder
             QuoteSeeder::class,
             // TaxDataSeeder::class,
             TitleSeeder::class,
-             StoreSeeder::class,
+            StoreSeeder::class,
             // PortfolioSeeder::class,
         ]);
 
         User::factory(100)->create();
-        Employee::factory(50)->create();
-        Salary::factory(50)->create();
+        Employee::factory(1000)->create();
+        Salary::factory(150)->create();
         Category::factory(3)->create();
-        Product::factory(10)->create();
-        ProductPrice::factory(10)->create();
+        Product::factory(50)->create();
+        ProductPrice::factory(100)->create();
+        ProductStock::factory(515)->create();
     }
 }

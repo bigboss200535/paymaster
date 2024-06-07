@@ -4,7 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Category>
  */
@@ -20,7 +20,7 @@ class CategoryFactory extends Factory
         $user = User::inRandomOrder()->first(); 
         
         return [
-            'category_id' => $this->faker->uuid,
+            // 'category_id' => $this->faker->uuid,
             'category_name' => $this->faker->lastName,
             'user_id' => $user->id,
             // 'added_id' => $user->id,

@@ -11,4 +11,5 @@ class Portfolio extends Model
     protected $table = 'portfolio';
     protected $primaryKey = 'portfolio_id';
     public $timestamps = false;
+    
 }

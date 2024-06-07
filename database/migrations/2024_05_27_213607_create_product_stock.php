@@ -14,12 +14,13 @@ return new class extends Migration
     public function up()
     {
         Schema::create('product_stock', function (Blueprint $table) {
+            // $table->int('stock_id',50);
             $table->string('product_id',50);
-            $table->float('stock_quantity',50); 
-            $table->date('inventory_date')->useCurrent();
-            $table->date('expirydate');  
-            $table->float('reorder_level',50);  
-            $table->string('status_flag');
+            $table->string('stock_quantity',50); 
+            $table->date('inventory_date')->nullable();
+            $table->date('expirydate')->nullable();  
+            $table->string('reorder_level',50);  
+            $table->string('status_flag')->nullable();
             $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             // $table->string('user_id', 50);  
             $table->string('store_id', 50);           
@@ -32,7 +33,7 @@ return new class extends Migration
             $table->string('archived', 100)->default('No');
             $table->date('archived_date')->nullable();
             $table->string('archived_by', 100)->nullable();
-            $table->primary('product_id');
+            // $table->primary('product_id');
             // $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('store_id')->references('store_id')->on('store');
         });

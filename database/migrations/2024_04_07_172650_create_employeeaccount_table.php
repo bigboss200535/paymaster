@@ -15,11 +15,19 @@ return new class extends Migration
     {
         Schema::create('salary_account', function (Blueprint $table) {
             $table->string('employee_id');
+            $table->string('bank', 100)->nullable();
+            $table->string('bank_account', 50)->nullable();
             $table->decimal('basic_salary', 10,2);
-            $table->decimal('paye', 10,2);
-            $table->decimal('ssnit_a', 10,2);
-            $table->decimal('ssnit_b', 10,2);
-            $table->decimal('ssnit_c', 10,2);
+            $table->string('allow_ssnit', 150)->default('1');
+            $table->string('allow_paye', 150)->default('1');
+            $table->string('allow_tier_2', 150)->default('1');
+            $table->string('allow_tier_3', 150)->default('1');
+            $table->string('welfare_deduction', 150)->default('1');
+            $table->string('medical_allowance', 150)->default('0');
+            $table->decimal('transport_allowance', 150)->default('0');
+            $table->string('other_allowance', 10,2)->default('1');
+            // $table->decimal('paye', 10,2);
+            $table->string('ssnit_number',50)->nullable();
             $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');
             $table->string('added_by', 100)->nullable();

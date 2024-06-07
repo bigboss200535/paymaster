@@ -3,30 +3,39 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+
 class ProfileController extends Controller
 {
 
     public function index()
     {
-        // fetch all user
-        $users = DB::table('users')->get();
+        $users = User::where('archived', 'No')->where('status', '=','Active')->get();
         return view('profile.index', compact('users'));
     }
 
     public function create()
     {
-        
+        return view('profile.create'); 
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        
+        $request->validate([
+            'product_id' => 'required|exists:products,id',
+            'username' => 'required|integer|min:1',
+        ]);
+
+         $product = User::create([
+            'product_name' => $request->product_name,
+            'category_id' => $request->category_id,
+        ]);  
     }
 
     public function viewedit()
