@@ -12,18 +12,19 @@ class Employee extends Model
     protected $table = 'employee';
     public $primaryKey = 'employee_id';
     public $timestamps = false;
+    protected $keyType = 'string';
 
-    public function user(){
-        return $this->belongsTo(User::class);
-      }
+    // public function user(){
+    //     return $this->belongsTo('App\Models\Employee', 'user_id');
+    //   }
 
-      public function department(){
-        return $this->belongsTo(Department::class);
-      }
+      // public function department(){
+      //   return $this->belongsTo('App\Models\Employee', 'department_id');
+      // }
 
-      public function designation(){
-        return $this->belongsTo('App\Models\Employee', 'designation_id');
-      }
+      // public function designation(){
+      //   return $this->belongsTo('App\Models\Employee', 'designation_id');
+      // }
 
     protected $fillable = [
         'employee_id',
@@ -53,7 +54,6 @@ class Employee extends Model
         'updated_date',
         'status',
         'user_id',
-
     ];
 
 }

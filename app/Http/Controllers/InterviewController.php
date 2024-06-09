@@ -14,4 +14,34 @@ class InterviewController extends Controller
         $applicant_list = DB::table('employee_interview')->get();
         return view('interview.list', compact('applicant_list'));
     }
+
+    public function create()
+    {
+
+    }
+
+    public function store()
+    {
+
+    }
+
+    public function show()
+    {
+
+    }
+
+    public function edit()
+    {
+
+    }
+
+    public function update()
+    {
+
+    }
+
+    public function destroy()
+    {
+        
+    }
 }

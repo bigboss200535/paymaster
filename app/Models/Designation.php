@@ -27,4 +27,8 @@ class Designation extends Model
         'archived_date',
         'archived_by'
     ];
+
+    public function department(){
+          return $this->belongsTo('App\Models\Department', 'department_id');
+        }
 }

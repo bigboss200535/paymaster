@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('category_id',50);
             $table->string('stocked',50);
             $table->string('expirable',50);  
-            $table->string('barcode',50)->nullable();
+            $table->string('barcode',50)->nullable()->unique();
             $table->string('image',50)->nullable(); 
             $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         

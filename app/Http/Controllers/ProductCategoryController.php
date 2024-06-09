@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\ProductCategory;
+  
 
-class CategoryController extends Controller
+class ProductCategoryController extends Controller
 {
     public function index()
     {
 
     }
-
+   
     public function create()
     {
 

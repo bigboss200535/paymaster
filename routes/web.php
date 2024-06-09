@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
         return view('profile.index', compact('users'));
     }); 
     
-    
+    // Route::resource('employees', 'EmployeeController');
     //fetch users
     Route::get('/interviews', [InterviewController::class, 'index']); //fetch interview list
     Route::get('/salaries', [SalaryController::class, 'index']); //fetch salaries
@@ -61,7 +61,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/add-product', [ProductController::class, 'create']); 
     // Route::get('/payer/{PayerId}/details', [PayerController::class, 'showone'])
     // ->name('payer.details');
-    Route::get('employee/{employee_id}/details', [EmployeeController::class, 'show'])->name('employee.show');
+    Route::get('employee/details/{employee_id}', [EmployeeController::class, 'show'])->name('employee.show');
     // Route::get('employee/{employee_id}/details', [EmployeeController::class, 'showone']); //fetch modify
     Route::get('/modify-user', [ProfileController::class, 'viewedit']); //fetch modify
     Route::get('/password-change', [ProfileController::class, 'editpassword']); //fetch users

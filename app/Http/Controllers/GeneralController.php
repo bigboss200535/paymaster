@@ -14,27 +14,27 @@ class GeneralController extends Controller
     public function index()
     {
         // fetch all employee
-        $count_users = DB::table('users')->where('archived', 'No')->count();
-        $countlocum = DB::table('employee')->where('staff_type', 'locum')->count();
-        $countpermanent = DB::table('employee')->where('staff_type', 'permanent')->count();
-        $count_active = DB::table('employee')->where('status', 'ACTIVE')->count();
-        $count_inactive = DB::table('employee')->where('status', 'INACTIVE')->count();
+        // $count_users = DB::table('users')->where('archived', 'No')->count();
+        // $countlocum = DB::table('employee')->where('staff_type', 'locum')->count();
+        // $countpermanent = DB::table('employee')->where('staff_type', 'permanent')->count();
+        $count_active = DB::table('employee')->where('status', 'Active')->count();
+        $count_inactive = DB::table('employee')->where('status', 'Inactive')->count();
         $workers = DB::table('employee')->get();
         session()->put('count_active', $count_active);
-        return view('home', compact('workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive', 'count_users'));
+        return view('home', compact('count_active'));
     }
 
     public function dashboard()
     {
         // fetch all employee
         $count_users = DB::table('users')->where('archived', 'No')->count();
-        $countlocum = DB::table('employee')->where('staff_type', 'locum')->count();
-        $countpermanent = DB::table('employee')->where('staff_type', 'permanent')->count();
-        $count_active = DB::table('employee')->where('status', 'ACTIVE')->count();
-        $count_inactive = DB::table('employee')->where('status', 'INACTIVE')->count();
+        // $countlocum = DB::table('employee')->where('staff_type', 'locum')->count();
+        // $countpermanent = DB::table('employee')->where('staff_type', 'permanent')->count();
+        $count_active = DB::table('employee')->where('status', 'Active')->where('archived', 'No')->count();
+        // $count_inactive = DB::table('employee')->where('status', 'Inactive')->count();
         $workers = DB::table('employee')->get();
         session()->put('count_active', $count_active);
-        return view('home', compact('workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive', 'count_users'));
+        return view('home', compact('count_active', 'count_users'));
     }
 
     public function online()

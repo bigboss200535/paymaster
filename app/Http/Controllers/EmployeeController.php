@@ -3,12 +3,17 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Department;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\Employee;
+use App\Models\Gender;
+use App\Models\Designation;
+
+
 
 class EmployeeController extends Controller
 {
@@ -16,19 +21,24 @@ class EmployeeController extends Controller
     public function index()
     {
         // fetch all employee
-        $countlocum = DB::table('employee')->where('staff_type', 'locum')->count();
-        $countpermanent = DB::table('employee')->where('staff_type', 'permanent')->count();
-        $count_active = DB::table('employee')->where('status', 'Active')->count();
-        $count_inactive = DB::table('employee')->where('status', 'Inactive')->count();
-        $workers = DB::table('employee')->get();
-        return view('employee.index', compact('workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive'));
+        $gender = Gender::where('archived', 'No')->where('status', '=','Active')->get();
+        $title = DB::table('title')->where('archived', 'No')->where('status', 'Active')->get();
+        $countlocum = Employee::where('archived', 'No')->where('status', '=','Active')->where('staff_type', '=','locum')->count();
+        $countpermanent = Employee::where('archived', 'No')->where('status', '=','Active')->where('staff_type', '=','permanent')->count();
+        $count_active = Employee::where('archived', 'No')->where('status', '=','Active')->count();
+        $count_inactive = Employee::where('archived', 'No')->where('status', '=','Inactive')->count();
+        $workers = Employee::where('archived', 'No')->get();
+        $designation = Designation::where('archived', 'No')->get();
+        $department = Department::where('archived', 'No')->where('status', 'Active')->get();
+
+        return view('employee.index', compact('designation','department','workers', 'countlocum', 'countpermanent', 'count_active', 'count_inactive', 'gender', 'title'));
     }
     
-    public function show($employee_id )
+    public function show(Request $request, $employee_id)
     {
-        $staff = Employee::rightJoin('users', 'users.id', '=', 'employee.user_id')
+        $staff = Employee::rightJoin('users', 'users.user_id', '=', 'employee.user_id')
         ->where('employee.employee_id', $employee_id)
-        ->select('employee.*', 'employee.employee_id as emp_id', 'users.id as userid', 'users.fullname as name')
+        ->select('employee.*', 'employee.employee_id as emp_id', 'users.user_id as userid', 'users.fullname as name')
         ->orderBy('employee.added_date', 'asc') 
         ->first();
 
@@ -122,7 +132,7 @@ class EmployeeController extends Controller
                 $payer_details->ssnit_number = $request->input('ssnit_number');
                 $payer_details->file_number = $request->input('file_number');
                 $payer_details->staff_type = $request->input('staff_type');
-                $payer_details->user_id =  Auth::user()->id;
+                $payer_details->user_id =  Auth::user()->user_id;
                 $payer_details->gh_card = $request->input('gh_card');
                 $payer_details->save();
 

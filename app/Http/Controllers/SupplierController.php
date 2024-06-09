@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Supplier;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SupplierController extends Controller
 {
@@ -36,7 +37,20 @@ class SupplierController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $request->validate([
+
+       ]);
+
+       $supplier = new Supplier();
+       $supplier->supplier = $request->supplier;
+       $supplier->address = $request->address;
+       $supplier->email = $request->email;
+       $supplier->telephone = $request->telephone;
+       $supplier->location = $request->location;
+       $supplier->user_id = Auth::user()->id;
+       $supplier->save(); 
+
+       return redirect()->back()->with('message', 'Supplier Saved!');
     }
 
     /**
@@ -56,9 +70,10 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
-    public function edit(Supplier $supplier)
+    public function edit(Supplier $supplier_id)
     {
-        //
+        $supplier = Supplier::findOrFail($supplier_id);
+        return view('supplier.edit', compact('supplier'));
     }
 
     /**
@@ -68,9 +83,12 @@ class SupplierController extends Controller
      * @param  \App\Models\Supplier  $supplier
      * @return \Illuminate\Http\Response
      */
+
     public function update(Request $request, Supplier $supplier)
     {
-        //
+        $supplier = Supplier::find($supplier);
+        $supplier->delete();
+        return redirect()->back();
     }
 
     /**

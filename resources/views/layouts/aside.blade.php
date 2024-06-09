@@ -186,6 +186,70 @@
     </li>
    
 <!-- ---------------------------------------sett--------------------------------------------- -->
+<!-- -----------------------------------leads------------------------------------------------- -->
+<li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-cart-alt"></i>
+        <div class="text-truncate" data-i18n="Users">Engagements</div>
+         <!-- <span class="badge badge-center rounded-pill bg-success ms-auto">4</span> -->
+      </a>
+      <ul class="menu-sub">
+        <!-- <li class="menu-item">
+          <a href="/addstudent" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Add Employee</div>
+          </a>
+        </li> -->
+         <li class="menu-item">
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Contacts</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Emails</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">SMS</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+   
+<!-- ---------------------------------------sett--------------------------------------------- -->
+<!-- -----------------------------------leads------------------------------------------------- -->
+<li class="menu-item">
+      <a href="javascript:void(0);" class="menu-link menu-toggle">
+        <i class="menu-icon tf-icons bx bx-cart-alt"></i>
+        <div class="text-truncate" data-i18n="Users">Leave</div>
+         <!-- <span class="badge badge-center rounded-pill bg-success ms-auto">4</span> -->
+      </a>
+      <ul class="menu-sub">
+        <!-- <li class="menu-item">
+          <a href="/addstudent" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Add Employee</div>
+          </a>
+        </li> -->
+         <li class="menu-item">
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Contacts</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">Emails</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url('sales') }}" class="menu-link">
+            <div class="text-truncate" data-i18n="List">SMS</div>
+          </a>
+        </li>
+      </ul>
+    </li>
+   
+<!-- ---------------------------------------sett--------------------------------------------- -->
 <!-- <li class="menu-item">
       <a href="javascript:void(0);" class="menu-link menu-toggle">
         <i class="menu-icon tf-icons bx bx-cart-alt"></i>

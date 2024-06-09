@@ -64,15 +64,17 @@ class ProductController extends Controller
 
     public function show($product_id)
     {
-        $invoice = Product::findOrFail($product_id);
-        $sales = Category::where('invoice_id', $product_id)->get();
+        $product = Product::findOrFail($product_id);
+        $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
 
-        // return view('invoice.show', compact('invoice','sales'));
+        // return view('product.show', compact('invoice','sales'));
     }
 
     public function edit($product_id)
     {
-        // $category = Category::findOrFail($id);
+        $product = Product::findOrFail($product_id);
+        $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
+
         // return view('category.edit', compact('category'));
     }
 
@@ -154,9 +156,6 @@ class ProductController extends Controller
         ->get();
 
         return view('product.purchases', compact('product')); 
-        
-        // Return the view with the products data
-        // return view('product.purchases', compact('products'));
     }
 
     public function category()
@@ -180,9 +179,6 @@ class ProductController extends Controller
         
     }
     
-
-   
-
     public function stock_adjustment()
     {
         
@@ -192,7 +188,7 @@ class ProductController extends Controller
     {
         
     }
-    
+
     public function expiry()
     {
         
