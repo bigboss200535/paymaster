@@ -119,7 +119,9 @@
                               <td>{{ $counter++ }}</td>
                               <td>{{ $product->product_name }}</td>
                               <td>{{ $product->category }}</td>
-                              <td>{{ $product->barcode }}</td>
+                              <td>
+                              {!! DNS1D::getBarcodeHTML('this_is_barcode', "C128",1.4,22) !!}
+                              </td>
                               <td class="text-nowrap text-sm-end" align="left">
                                 @if($product->stocked === '101')
                                 <span class="badge bg-label-info me-1">Yes</span>

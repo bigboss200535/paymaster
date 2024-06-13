@@ -23,16 +23,19 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-checkboxes-jquery/datatables.checkboxes.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-buttons-bs5/buttons.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/dropzone/dropzone.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/typography.css') }}"> -->
+    <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/katex.css') }}"> -->
+    <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('vendor/libs/tagify/tagify.css') }}" />
-    <link rel="stylesheet" href="{{ asset('vendor/libs/flatpickr/flatpickr.css') }}" />
-    <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}">
+    <!-- <link rel="stylesheet" href="{{ asset('vendor/libs/flatpickr/flatpickr.css') }}" /> -->
+    <!-- <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('vendor/libs/@form-validation/form-validation.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/css/pages/page-profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/spinkit/spinkit.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
     
     <!-- Livewire Styles -->
      @livewireStyles
@@ -125,26 +128,26 @@
     <script src="{{ asset('vendor/libs/i18n/i18n.js') }}"></script>
     <script src="{{ asset('vendor/libs/typeahead-js/typeahead.js') }}"></script>
     <script src="{{ asset('vendor/js/menu.js') }}"></script>
-    <script src="{{ asset('vendor/libs/quill/katex.js') }}"></script>
-    <script src="{{ asset('vendor/libs/quill/quill.js') }}"></script>
-    <script src="{{ asset('vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
+    <!-- <script src="{{ asset('vendor/libs/quill/katex.js') }}"></script> -->
+    <!-- <script src="{{ asset('vendor/libs/quill/quill.js') }}"></script> -->
+    <!-- <script src="{{ asset('vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script> -->
     <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
     <script src="{{ asset('vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('vendor/libs/flatpickr/flatpickr.js') }}"></script>
     <script src="{{ asset('vendor/libs/tagify/tagify.js') }}"></script>
-    <script src="{{ asset('vendor/libs/dropzone/dropzone.js') }}"></script>
+    <!-- <script src="{{ asset('vendor/libs/dropzone/dropzone.js') }}"></script> -->
     <script src="{{ asset('vendor/libs/@form-validation/popular.js') }}"></script>
     <script src="{{ asset('vendor/libs/@form-validation/bootstrap5.js') }}"></script>
     <script src="{{ asset('vendor/libs/@form-validation/auto-focus.js') }}"></script>
     <script src="{{ asset('js/main.js') }}"></script>
-    <script src="{{ asset('js/app-ecommerce-product-add.js') }}"></script>
+    <!-- <script src="{{ asset('js/app-ecommerce-product-add.js') }}"></script> -->
     <script src="{{ asset('js/dashboards-analytics.js') }}"></script>
     <script src="{{ asset('js/app-academy-dashboard.js') }}"></script>
     <script src="{{ asset('js/app-ecommerce-category-list.js') }}"></script>
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js') }}"></script>
-    <script src="{{ asset('js/tables-datatables-basic.js') }}"></script>
-    <script src="{{ asset('js/form-wizard-numbered.js') }}"></script>
+    <!-- <script src="{{ asset('js/tables-datatables-basic.js') }}"></script> -->
+    <!-- <script src="{{ asset('js/form-wizard-numbered.js') }}"></script> -->
     <script src="{{ asset('vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
     </body>
 </html>
@@ -167,9 +170,126 @@ $(document).ready( function () {
 </script>
 
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#employee_add').submit(function(e) {
+            e.preventDefault();
+
+            // Collect form data
+            var formData = new FormData(this);
+
+            // Client-side validation
+            var title = $('#title').val();
+            var firstname = $('#firstname').val();
+            var lastname = $('#lastname').val();
+            var gender = $('#gender').val();
+            var telephone = $('#telephone').val();
+            var birth_date = $('#birth_date').val();
+            var portfolio = $('#portfolio').val();
+            var department = $('#department_id').val();
+            var designation = $('#designation_id').val();
+            var religion = $('#religion').val();
+            var address = $('#address').val();
+            var region = $('#region').val();
+            var bank = $('#bank').val();
+            var bank_account = $('#bank_account').val();
+            var ssnit_number = $('#ssnit_number').val();
+            var file_number = $('#file_number').val();
+            var staff_type = $('#staff_type').val();
+            var gh_card = $('#gh_card').val();
+
+            if (!title) {
+                // toastr.error('Title is required.', 'Validation Error');
+                alert('alert....')
+                return;
+            }
+
+            if (firstname.length < 3) {
+                toastr.error('First name must be at least 3 characters long.', 'Validation Error');
+                return;
+            }
+
+            if (lastname.length < 3) {
+                toastr.error('Last name must be at least 3 characters long.', 'Validation Error');
+                return;
+            }
+
+            if (!gender) {
+                toastr.error('Gender is required.', 'Validation Error');
+                return;
+            }
+
+            if (telephone.length < 10) {
+                toastr.error('Telephone number must be at least 10 characters long.', 'Validation Error');
+                return;
+            }
+
+            if (!birth_date) {
+                toastr.error('Birth date is required.', 'Validation Error');
+                return;
+            }
+
+            if (!portfolio) {
+                toastr.error('Portfolio is required.', 'Validation Error');
+                return;
+            }
+
+            if (!department) {
+                toastr.error('Department is required.', 'Validation Error');
+                return;
+            }
+
+            if (!designation) {
+                toastr.error('Designation is required.', 'Validation Error');
+                return;
+            }
+
+            if (!religion) {
+                toastr.error('Religion is required.', 'Validation Error');
+                return;
+            }
+
+            if (address.length < 3) {
+                toastr.error('Address must be at least 3 characters long.', 'Validation Error');
+                return;
+            }
+
+            if (!region) {
+                toastr.error('Region is required.', 'Validation Error');
+                return;
+            }
+
+            if (!staff_type) {
+                toastr.error('Staff type must be specified.', 'Validation Error');
+                return;
+            }
+
+            $.ajax({
+                url: '/storeemployee',
+                type: 'POST',
+                data: formData,
+                dataType: 'json',
+                contentType: false,
+                processData: false,
+                success: function(response) {
+                    toastr.success('Data submitted successfully.', 'Success');
+                    $('#employee_add')[0].reset();
+                    $('#addUser').modal('hide');
+                },
+                error: function(xhr, status, error) {
+                    toastr.error('An error occurred while submitting the form. Please try again later.', 'Error');
+                }
+            });
+        });
+    });
+</script>
+
+
+<!-- 
+
+<script type="text/javascript">
    $(document).ready(function() {
     $('.product_search').select2();
-    $('#employee_add').submit(function(e) {
+    $('#employee_xxxxxxxxxx').submit(function(e) {
         e.preventDefault(); 
 
         // Collect form data
@@ -347,7 +467,7 @@ $(document).ready( function () {
         });
     });
 });
- </script>
+ </script> -->
  <script type="text/javascript">
          // JavaScript
       document.addEventListener('DOMContentLoaded', function() {

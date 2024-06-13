@@ -28,11 +28,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             GenderSeeder::class,
-            QuoteSeeder::class,
-            // TaxDataSeeder::class,
             TitleSeeder::class,
             StoreSeeder::class,
-            // PortfolioSeeder::class,
         ]);
 
         User::factory(100)->create();

@@ -5,11 +5,13 @@ use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\SalaryController;
 use App\Http\Controllers\InterviewController;
 use App\Http\Controllers\GeneralController;
+use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductPricingController;
-// use App\Http\Controllers\ProductCategoryController;
 use App\Http\Controllers\SalesController;
+use App\Models\ProductCategory;
 use App\Models\User;
+
 
 // use App\Models\Employee;
 use Illuminate\Support\Facades\Route;
@@ -53,7 +55,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/applications', [EmployeeController::class, 'applications']); //list applications
     Route::post('storeemployee', [EmployeeController::class, 'store'])->name('employee.store'); 
     Route::get('/dashboard', [GeneralController::class, 'dashboard']); //display dashboard
-    Route::get('/category', [ProductController::class, 'category']); 
+    Route::get('/category', [ProductCategoryController::class, 'index']); 
     Route::get('/products', [ProductController::class, 'index']); 
     Route::get('/prices', [ProductPricingController::class, 'index']); 
     Route::get('/purchases', [ProductController::class, 'purchases']); 

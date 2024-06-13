@@ -158,11 +158,6 @@ class ProductController extends Controller
         return view('product.purchases', compact('product')); 
     }
 
-    public function category()
-    {
-        $category = Category::where('archived', 'No')->get();
-        return view('category.index', compact('category', 'category'));
-    }
 
     public function purchases_approval()
     {

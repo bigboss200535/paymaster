@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\ProfileUpdateRequest;
 use App\Models\Department;
@@ -77,53 +79,96 @@ class EmployeeController extends Controller
         return view('employee.create', compact('title', 'gender'));
     }
 
+    public function store_employee(Request $request)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+            'firstname' => 'required|min:3|max:100',
+            'middlename' => 'nullable|min:3|max:100',
+            'surname' => 'required |min:3|max:100',
+            'image' => 'nullable',
+            'gender' => 'required |min:3',
+            'birthdate' => 'required |min:3',
+            'ssnit_number' => 'nullable',
+            'staff_type' => 'nullable',
+            'email' => 'nullable|min:3|max:150',
+            'telephone' => 'nullable|min:3|max:50',
+            'religion' => 'nullable|min:3|max:50',
+            'region' => 'nullable|min:3|max:50',
+            'address' => 'nullable',            
+            'gh_card' => 'nullable',
+            'file_number' => 'nullable',
+            'portfolio' => 'nullable',
+            'bank' => 'nullable',
+            'bank_account' => 'nullable',
+            'department_id' => 'nullable',
+            'designation_id' => 'nullable',
+        ]);
+
+        if($validator->fails()){
+            return response()->json($validator->errors(), 400);
+        }
+
+        $data = $request->all();
+        Employee::create($data);
+
+        return response()->json([
+            'success' =>true,
+            'message'=> 'data successfully created'
+        ]);
+    }
+
 
     public function store(Request $request)
     {
-        // $validatedData = $request->validate([
-        //     'title' => 'required|min:3|max:50',
-        //     'firstname' => 'required|min:3|max:100',
-        //     'middlename' => 'nullable|min:3|max:100',
-        //     'lastname' => 'required |min:3|max:100',
-        //     'gender' => 'required',
-        //     'telephone' => 'nullable',
-        //     'birth_date' => 'nullable',
-        //     'portfolio' => 'nullable',
-        //     'department' => 'nullable',
-        //     'last_known_school' => 'nullable|min:3|max:150',
-        //     'last_known_class' => 'nullable|min:3|max:50',
-        //     'user_id' => 'nullable|min:3|max:50',
-        //     'transaction' => 'nullable',            
-            // 'image' => 'nullable',
-            // 'added_id' => 'nullable',
-            // 'user_id' => 'nullable',
-            
-        // ]);
+        $validatedData = $request->validate([
+            'title' => 'required|min:3|max:50',
+            'firstname' => 'required|min:3|max:100',
+            'middlename' => 'nullable|min:3|max:100',
+            'surname' => 'required|min:3|max:100',
+            'image' => 'nullable',
+            'gender' => 'required|min:3',
+            'birthdate' => 'required|min:3',
+            'portfolio' => 'nullable',
+            'department_id' => 'nullable',
+            'designation_id' => 'nullable',
+            'email' => 'nullable|min:3|max:150',
+            'telephone' => 'nullable|min:3|max:50',
+            'religion' => 'nullable|min:3|max:50',
+            'address' => 'nullable',            
+            'region' => 'nullable|min:3|max:50',
+            'bank' => 'nullable',
+            'bank_account' => 'nullable',
+           
+            'file_number' => 'nullable',
+            'ssnit_number' => 'nullable',
+            'gh_card' => 'nullable',
+            'staff_type' => 'nullable',
+        //    'religion'=>'nullable',
+        ]);       
+
         $existing_employee = Employee::where('firstname', $request->input('firstname'))
         ->where('surname', $request->input('lastname'))
         ->where('birthdate', $request->input('birthdate'))
         ->first();
 
         if ($existing_employee) {
-                return redirect()->back()->withErrors(
-                    ['error' => 'Employee with the same details already exists.']
-                );
+                return redirect()->back()->withErrors(['error' => 'Data already exists.']);
         }
 
                 $id_generated = $this->generate_id($request);         
-
                 $payer_details = new Employee();
                 $payer_details->employee_id = $id_generated;
                 $payer_details->title = $request->input('title');
                 $payer_details->firstname = $request->input('firstname');
                 $payer_details->middlename = $request->input('middlename');
-                $payer_details->surname = $request->input('lastname');
+                $payer_details->surname = $request->input('surname');
                 $payer_details->gender = $request->input('gender');
-                $payer_details->telephone = $request->input('nationality');
-                $payer_details->birthdate = $request->input('birth_date');
+                $payer_details->telephone = $request->input('telephone');
+                $payer_details->birthdate = $request->input('birthdate');
                 $payer_details->portfolio = $request->input('portfolio');
-                $payer_details->department_id = $request->input('department');
-                $payer_details->designation_id = $request->input('designation');
+                $payer_details->department_id = $request->input('department_id');
+                $payer_details->designation_id = $request->input('designation_id');
                 $payer_details->religion = $request->input('religion');
                 $payer_details->address = $request->input('address');
                 $payer_details->region = $request->input('region');
@@ -137,6 +182,7 @@ class EmployeeController extends Controller
                 $payer_details->save();
 
             return response()->json(['success' => true, 'id_generated' => $id_generated], 200);
+            // return redirect()->route('employee.index')->with('success', 'Employee created successfully. ID: ' . $id_generated);
     }
 
     private function generate_id(Request $request)
@@ -168,11 +214,18 @@ class EmployeeController extends Controller
     /**
      * Display the user's profile form.
      */
-    public function edit(Request $request): View
+    public function edit(Request $request, $employee_id)
     {
-        return view('profile.edit', [
-            'user' => $request->user(),
+        $post = Employee::where('employee_id', $employee_id)->first();
+
+        return response()->json([
+            'success' => true,
+            'post' => $post
         ]);
+
+        // return view('profile.edit', [
+        //     'user' => $request->user(),
+        // ]);
     }
 
     public function editpassword(Request $request): View
@@ -188,9 +241,11 @@ class EmployeeController extends Controller
             'user' => $request->user(),
         ]);
     }
+
     /**
      * Update the user's profile information.
      */
+
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
@@ -201,6 +256,7 @@ class EmployeeController extends Controller
         $request->user()->save();
         return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
+
 
     /**
      * Delete the user's account.

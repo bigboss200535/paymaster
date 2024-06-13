@@ -11,7 +11,7 @@ class Category extends Model
     protected $table = 'product_category';
     protected $primaryKey = 'category_id';
     public $timestamps = false;
-    protected $keyType = 'string';
+    // protected $keyType = 'string';
 
     protected $fillable =[
         'category_id',
