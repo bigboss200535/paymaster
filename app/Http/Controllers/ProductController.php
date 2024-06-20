@@ -22,7 +22,7 @@ class ProductController extends Controller
         $count_new = Product::where('archived', 'No')->where('status', '=','Active')->get();
         $products = Product::rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id')
         ->where('product.archived', 'No')
-        ->select('product.product_id','product.product_name','product.added_date','product.status', 'product.barcode' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
+        ->select('product.product_id','product.product_name','product.added_date','product.status' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
         ->orderBy('product.added_date', 'asc') 
         ->get();
 
@@ -32,22 +32,28 @@ class ProductController extends Controller
     public function create()
     {
         $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
-        return view('product.create', compact('category'));
+        $products = Product::rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id')
+        ->where('product.archived', 'No')
+        ->select('product.product_id','product.product_name','product.added_date','product.status' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
+        ->orderBy('product.added_date', 'asc') 
+        ->paginate(5);
+
+        return view('product.create', compact('category', 'products'));
     }
 
     public function store(Request $request)
     {
-        $image_path = '';
+        // $image_path = '';
 
-        if ($request->hasFile('image')) {
-            $image_path = $request->file('image')->store('products', 'public');
-        }
+        // if ($request->hasFile('image')) {
+        //     $image_path = $request->file('image')->store('products', 'public');
+        // }
 
         $product = Product::create([
             'product_name' => $request->product_name,
             'category_id' => $request->category_id,
             // 'image' => $image_path,
-            'barcode' => $request->barcode,
+            // 'barcode' => $request->barcode,
             'stocked' => $request->price,
             'expirable' => $request->quantity,
             'user_id' => $request->user_id,
@@ -62,6 +68,25 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('success', 'Success, New product has been added successfully!');
     }
 
+    private function product_id(Request $request)
+    {
+        // Retrieve the count of existing
+        $count_payers = Product::count();
+        // Extract the initials from the request
+        $surname_initial = strtoupper(substr($request->input('product_name'), 0, 1));
+        $firstname_initial = strtoupper(substr($request->input('category_status'), 0, 1));
+        $count_plus_one = $count_payers + 1;
+        $currentHour = date('H');
+        $currentDay = date('d');
+        $currentMonth = date('m');
+        $currentYear = date('Y');
+        $desiredLength = 4;
+        $formatted_id = str_pad($count_plus_one, $desiredLength, '0', STR_PAD_LEFT);
+        $product_id = $surname_initial.$formatted_id.$firstname_initial.$currentHour.$currentDay.$currentMonth.$currentYear;
+        return $product_id;
+    }
+
+
     public function show($product_id)
     {
         $product = Product::findOrFail($product_id);
@@ -72,8 +97,16 @@ class ProductController extends Controller
 
     public function edit($product_id)
     {
-        $product = Product::findOrFail($product_id);
-        $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
+        $product = Product::find($product_id);
+        // $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
+        // $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
+        // $product = Product::rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id')
+        // ->where('product.archived', 'No')
+        // ->where('product.product_id', $product_id)
+        // ->select('product.product_id','product.product_name','product.added_date','product.status' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
+        // ->orderBy('product.added_date', 'asc') 
+        // ->get();
+        return response()->json(['product'=> $product]);
 
         // return view('category.edit', compact('category'));
     }
@@ -92,11 +125,24 @@ class ProductController extends Controller
         return redirect()->back()->with('message', 'Category updated successfully!');
     }
 
-    public function destroy($product_id)
+    public function destroy(Request $request)
     {
-        $product = Product::find($product_id);
-        $product->delete();
-        return redirect()->back();
+    // Validate the request
+    $request->validate([
+        'product_id' => 'required',
+    ]);
+        
+        $used_product_price = ProductPrice::where('product_id', $request->input('product_id')) ->first();
+        $used_product_stock = ProductPrice::where('product_id', $request->input('product_id')) ->first();
+        
+        if($used_product_stock || $used_product_price)
+        {
+            return 200;
+        }
+        $category = Product::find($request->product_id);
+        $category->delete();
+        return 201;
+
     }
 
 
@@ -148,7 +194,7 @@ class ProductController extends Controller
         ->rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id') // Join with product_category table
         ->where('product_price.archived', 'No')
         ->select('product.product_id', 'product_price.retail_price','product.product_name','product.added_date',
-        'product.status', 'product.barcode' ,'product.stocked','product.expirable',
+        'product.status' ,'product.stocked','product.expirable',
         'product_category.category_id as pro_id', 'product_category.category_name as category',
             DB::raw("CONCAT(product.product_name, ' | ', product_price.retail_price) as product_and_price")
         )

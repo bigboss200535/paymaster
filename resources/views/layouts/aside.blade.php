@@ -126,11 +126,11 @@
             <div class="text-truncate" data-i18n="List">Product</div>
           </a>
         </li>
-        <!-- <li class="menu-item">
-          <a href="{{ url('addproducts') }}" class="menu-link">
+        <li class="menu-item">
+          <a href="{{ url('add-product') }}" class="menu-link">
             <div class="text-truncate" data-i18n="List">Add Product</div>
           </a>
-        </li> -->
+        </li>
         <li class="menu-item">
          <a href="{{ url('prices') }}" class="menu-link">
           <div class="text-truncate" data-i18n="list">Pricing</div>

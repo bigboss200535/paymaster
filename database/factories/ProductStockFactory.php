@@ -31,6 +31,7 @@ class ProductStockFactory extends Factory
             'store_id' => $store->store_id,
             'user_id' => $user->id,
             'added_id' => $user->id,
+            'inventory_date' => $this->faker->dateTimeThisMonth(),
             'added_date' => $this->faker->dateTimeThisMonth(),
             'status' => $this->faker->randomElement(['Active']),
             'archived' => $this->faker->randomElement(['No']),

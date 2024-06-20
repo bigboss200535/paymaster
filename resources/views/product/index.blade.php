@@ -152,7 +152,7 @@
                                                   <a class="dropdown-item" href="">
                                                     <i class="bx bx-edit-alt me-1"></i> More
                                                   </a>
-                                                  <a class="dropdown-item" href="javascript:void(0);">
+                                                  <a class="dropdown-item product_delete_btn" data-id="{{ $product->product_id}}" href="#">
                                                       <i class="bx bx-trash me-1"></i> Delete
                                                   </a>
                                             </div>
@@ -176,7 +176,10 @@
                       </table>
                     </div>
                   </div>   
-        </div>
-
+             </div>
           </div>
+
+          <!-- product modal form -->
+
+          <!-- end of product modal form -->
     </x-app-layout>

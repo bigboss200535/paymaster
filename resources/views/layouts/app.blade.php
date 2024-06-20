@@ -28,18 +28,13 @@
     <!-- <link rel="stylesheet" href="{{ asset('assets/vendor/libs/quill/editor.css') }}"> -->
     <link rel="stylesheet" href="{{ asset('vendor/libs/tagify/tagify.css') }}" />
     <!-- <link rel="stylesheet" href="{{ asset('vendor/libs/flatpickr/flatpickr.css') }}" /> -->
-    <!-- <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}"> -->
+    <link rel="stylesheet" href="{{ asset('vendor/libs/datatables-rowgroup-bs5/rowgroup.bootstrap5.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/libs/@form-validation/form-validation.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/css/pages/page-profile.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/spinkit/spinkit.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-
-    
-    <!-- Livewire Styles -->
-     @livewireStyles
-
+   
     <script src="{{ asset('vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('vendor/js/template-customizer.js') }}"></script>
     <script src="{{ asset('js/config.js') }}"></script>
@@ -130,7 +125,7 @@
     <script src="{{ asset('vendor/js/menu.js') }}"></script>
     <!-- <script src="{{ asset('vendor/libs/quill/katex.js') }}"></script> -->
     <!-- <script src="{{ asset('vendor/libs/quill/quill.js') }}"></script> -->
-    <!-- <script src="{{ asset('vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script> -->
+    <script src="{{ asset('vendor/libs/datatables-bs5/datatables-bootstrap5.js') }}"></script>
     <script src="{{ asset('vendor/libs/moment/moment.js') }}"></script>
     <script src="{{ asset('vendor/libs/apex-charts/apexcharts.js') }}"></script>
     <script src="{{ asset('vendor/libs/flatpickr/flatpickr.js') }}"></script>
@@ -149,6 +144,8 @@
     <!-- <script src="{{ asset('js/tables-datatables-basic.js') }}"></script> -->
     <!-- <script src="{{ asset('js/form-wizard-numbered.js') }}"></script> -->
     <script src="{{ asset('vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <!-- <script src="{{ asset('mainjs.js') }}"></script> -->
     </body>
 </html>
 
@@ -198,23 +195,22 @@ $(document).ready( function () {
             var gh_card = $('#gh_card').val();
 
             if (!title) {
-                // toastr.error('Title is required.', 'Validation Error');
-                alert('alert....')
+                toastr.warning('Title is required.', 'Validation Error');
                 return;
             }
 
             if (firstname.length < 3) {
-                toastr.error('First name must be at least 3 characters long.', 'Validation Error');
+                toastr.warning('First name must be at least 3 characters long.', 'Validation Error');
                 return;
             }
 
             if (lastname.length < 3) {
-                toastr.error('Last name must be at least 3 characters long.', 'Validation Error');
+                toastr.warning('Last name must be at least 3 characters long.', 'Validation Error');
                 return;
             }
 
             if (!gender) {
-                toastr.error('Gender is required.', 'Validation Error');
+                toastr.warning('Gender is required.', 'Validation Error');
                 return;
             }
 
@@ -283,212 +279,17 @@ $(document).ready( function () {
     });
 </script>
 
-
-<!-- 
-
-<script type="text/javascript">
-   $(document).ready(function() {
-    $('.product_search').select2();
-    $('#employee_xxxxxxxxxx').submit(function(e) {
-        e.preventDefault(); 
-
-        // Collect form data
-        var formData = new FormData(this);
-        var title = $('#title').val();
-        var firstname = $('#firstname').val();
-        var lastname = $('#lastname').val();
-        var gender = $('#gender').val();
-        var telephone = $('#telephone').val();
-        var birth_date = $('#birth_date').val();
-        var portfolio = $('#portfolio').val();
-        var department = $('#department').val();
-        var designation = $('#designation').val();
-        var religion = $('#religion').val();
-        var address = $('#address').val();
-        var region = $('#region').val();
-        var bank = $('#bank').val();
-        var bank_account = $('#bank_account').val();
-        var ssnit_number = $('#ssnit_number').val();
-        // var user_id = $('#user_id').val();
-        var file_number = $('#file_number').val();
-        var staff_type = $('#staff_type').val();
-        var gh_card = $('#gh_card').val();
-        // Client-side validation
-
-        if (!title) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Title is required.'
-            });
-            return;
-        }
-
-        if (firstname.length < 3 ) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'First name must be at least 3 characters long.'
-            });
-            return;
-        }
-         if (lastname.length < 3) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Last name must be at least 3 characters long.'
-            });
-            return;
-        }
-
-         if (!gender) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Gender is required'
-            });
-            return;
-        }
-        if (telephone.length < 10) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Telephone number must be at least 10 characters long'
-            });
-            return;
-        }
-        if (!birth_date) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Birth date is required.'
-            });
-            return;
-        }
-        if (!portfolio) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Portfolio is required.'
-            });
-            return;
-        }
-         if (!department) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Department is required.'
-            });
-            return;
-        }
-        if (!designation) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Designation is required.'
-            });
-            return;
-        }
-        if (!religion) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Religion is required.'
-            });
-            return;
-        } 
-        if (address.length < 3) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Address must be at least 3 characters long.'
-            });
-            return;
-        }
-       
-        if (!region) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Region is required.'
-            });
-            return;
-        }
-
-        if (!staff_type) {
-            // Display SweetAlert error message
-            Swal.fire({
-                icon: 'error',
-                title: 'Validation Error',
-                text: 'Staff type must be specified.'
-            });
-            return;
-        }
-
-        $.ajax({
-            url: '/storeemployee',
-            type: 'POST',
-            data: formData,
-            dataType: 'json',
-            contentType: false,
-            processData: false,
-            success: function(response) {
-                
-                // Display SweetAlert success message
-                Swal.fire({
-                    icon: 'success',
-                    title: 'Success',
-                    text: 'Data submitted successfully.'
-                });
-                // reset form
-                $('#employee_add')[0].reset();
-            },
-            error: function(xhr, status, error) {
-                // Handle error response
-                // Display SweetAlert error message
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An error occurred while submitting the form. Please try again later.'
-                });
-            }
-        });
-    });
-});
- </script> -->
  <script type="text/javascript">
-         // JavaScript
       document.addEventListener('DOMContentLoaded', function() {
-          // Get the birth date input field
           var birthDateInput = document.getElementById('birth_date');
-
-          // Add event listener for input change
           birthDateInput.addEventListener('input', function() {
-              // Get the selected birth date value
               var dob = new Date(this.value);
               if (!isValidDate(dob)) return;
-
-              // Calculate the age
               var age = calculateAge(dob);
-
-              // Set the calculated age to the age input field
               document.getElementById('age').value = age;
           });
       });
 
-      // Function to calculate age based on birth date
       function calculateAge(birthDate) {
           var now = new Date();
           var dob = new Date(birthDate);
@@ -502,17 +303,190 @@ $(document).ready( function () {
           return age;
       }
 
-      // Function to check if date is valid
       function isValidDate(date) {
           return !isNaN(date.getTime());
       }
+ </script>
+<script type="text/javascript">
+  $(document).ready(function() {
+    // Handle form submission for saving and updating
+    $('#category_save').on('submit', function(e) {
+      e.preventDefault();
+
+      // Collect form data
+      var category_id = $('#category_id').val();
+      var category_name = $('#category_name').val();
+      var category_status = $('#category_status').val();
+      var url = category_id ? '/category/' + category_id : '/category';
+      var method = category_id ? 'PUT' : 'POST';
+
+      // Client-side validation
+      if (category_name.length < 3) {
+        toastr.warning('Category name must be at least 3 characters long');
+        return;
+      }
+
+      if (!category_status) {
+        toastr.warning('Status is required');
+        return;
+      }
+
+      // Check if category_id has a value before update
+      if (category_id && method === 'PUT') {
+        $.ajax({
+          url: category_id ? '/category/' + category_id : '/category',
+          type: method,
+          data: $(this).serialize(),
+          success: function(response) {
+            toastr.success('Data updated successfully!');
+            $("#product_list").load(location.href + " #product_list");
+            $('#category_save')[0].reset();
+            $('#category_id').val('');
+          },
+          error: function(xhr, status, error) {
+            toastr.error('Error updating category! Try again.');
+          }
+        });
+      } else {
+        $.ajax({
+          url: '/category',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(response) {
+            var result = JSON.parse(response);
+              if (result == 201) {
+                $("#product_list").load(location.href + " #product_list");
+                $('#category_save')[0].reset();
+                toastr.success('Data save successfully!');
+              } else if (result == 200) {
+                toastr.warning('Ops');
+              }    
+          },
+          error: function(xhr, status, error) {
+            toastr.error('Error saving data! Try again.');
+          }
+        });
+      }
+    });
+
+    // Handle delete functionality
+    $(document).on('click', '.delete-btn', function() {
+      var category_id = $(this).data('id');
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: '/category/' + category_id,
+            type: 'DELETE',
+            data: {
+              _token: '{{ csrf_token() }}',
+              category_id: category_id
+            },
+            success: function(response) {
+              var result = JSON.parse(response);
+              if (result == 201) {
+                $("#product_list").load(location.href + " #product_list");
+                toastr.success('Data deleted successfully!');
+              } else if (result == 200) {
+                toastr.warning('Data is attached to a product');
+              }
+            },
+            error: function(xhr, status, error) {
+              toastr.error('Error deleting item! Try again');
+            }
+          });
+        }
+      });
+    });
+
+    // Handle edit functionality
+    $(document).on('click', '.edit-btn', function() {
+      var category_id = $(this).data('id');
+
+      $.ajax({
+        url: '/category/' + category_id + '/edit',
+        type: 'GET',
+        success: function(response) {
+          $('#category_id').val(response.category.category_id);
+          $('#category_name').val(response.category.category_name);
+          $('#category_status').val(response.category.status).trigger('change');
+        },
+        error: function(xhr, status, error) {
+          toastr.error('Error fetching data! Try again.');
+        }
+      });
+    });
+  });
+</script>
+  <script>
+    // Handle delete functionality
+    $(document).on('click', '.product_delete_btn', function() {
+      var product_id = $(this).data('id');
+
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to undo this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          $.ajax({
+            url: '/products/' + product_id,
+            type: 'DELETE',
+            data: {
+              _token: '{{ csrf_token() }}',
+              product_id: product_id
+            },
+            success: function(response) {
+              var result = JSON.parse(response);
+              if (result == 201) {
+                $("#product_list").load(location.href + " #product_list");
+                toastr.success('Data deleted successfully!');
+              } else if (result == 200) {
+                toastr.warning('Data is attached to stock or prices');
+              }
+            },
+            error: function(xhr, status, error) {
+              toastr.error('Error deleting item! Try again');
+            }
+          });
+        }
+      });
+    });
 
 
- </script>
- <script>
-//     $(document).ready(function() {
-   
-// });
-    // $('.').select2();
- </script>
-  
+    $(document).on('click', '.product_edit_btn', function() {
+      var product_id = $(this).data('id');
+
+      $.ajax({
+        url: '/products/' + product_id + '/edit',
+        type: 'GET',
+        success: function(response) {
+          $('#product_id').val(response.product.product_id)[0];
+          $('#product_name').val(response.product.product_name)[0];
+          $('#category').val(response.product.category_id).trigger('change');
+          $('#product_description').val(response.product.description);
+          $('#manufacturer').val(response.product.manufacturer);
+          $('#expirable').val(response.product.expirable);
+          $('#stockable').val(response.product.stocked);
+          $('#sales_type').val(response.product.sales_type);
+          $('#status').val(response.product.status);
+          
+        },
+        error: function(xhr, status, error) {
+          toastr.error('Error fetching data! Try again.');
+        }
+      });
+    });
+  </script>

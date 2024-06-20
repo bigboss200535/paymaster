@@ -27,7 +27,7 @@ class ProductFactory extends Factory
             'category_id' => $category->category_id,
             'stocked' => $this->faker->randomElement(['101', '404']), // 101 and 404 for stocked item and non-stocked items 
             'expirable' => $this->faker->randomElement(['Yes', 'No']),
-            'barcode' => $this->faker->randomNumber(5, true),
+            'manufacturer' => $this->faker->randomElement('Tobinco', 'Saqs', 'N and A'),
             'user_id' => $user->id,
             'added_date' => $this->faker->dateTimeThisMonth(),
             'status' => $this->faker->randomElement(['Active', 'Inactive']),
