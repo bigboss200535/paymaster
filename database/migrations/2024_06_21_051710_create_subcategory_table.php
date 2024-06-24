@@ -13,17 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product', function (Blueprint $table) {
-            $table->string('product_id',50);
-            $table->string('product_name',50);
-            $table->text('description')->nullable();
-            $table->string('category_id',50);
-            $table->string('stocked',50);
-            $table->string('expirable',50);  
-            $table->string('manufacturer',50)->nullable();
-            $table->string('sales_type',50)->nullable();
-            $table->string('image',50)->nullable(); 
-            $table->string('is_new',50)->nullable(); 
+        Schema::create('subcategory', function (Blueprint $table) {
+            $table->id('sub_category_id');
+            $table->foreign('category_id')->references('category_id')->on('product_category');
+            $table->string('sub_category',50);
             $table->foreignUuid('user_id')->references('id')->on('users')->onUpdate('cascade');
             // $table->foreignId('user_id')->constrained('users')->onUpdate('cascade');         
             $table->string('added_id', 50)->nullable();
@@ -35,10 +28,6 @@ return new class extends Migration
             $table->string('archived', 100)->default('No');
             $table->date('archived_date')->nullable();
             $table->string('archived_by', 100)->nullable();
-            $table->primary('product_id');
-            // $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('category_id')->references('category_id')->on('product_category');
-            // $table->foreign('category_id')->references('category_id')->on('product_category')->onUpdate('cascade');
         });
     }
 
@@ -49,6 +38,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('subcategory');
     }
 };

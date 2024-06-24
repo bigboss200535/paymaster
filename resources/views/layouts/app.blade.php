@@ -43,7 +43,7 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
+    
     </head>
     <style>
             .preloader-container {
@@ -145,7 +145,8 @@
     <!-- <script src="{{ asset('js/form-wizard-numbered.js') }}"></script> -->
     <script src="{{ asset('vendor/libs/jquery-repeater/jquery-repeater.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <!-- <script src="{{ asset('mainjs.js') }}"></script> -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>  
+    <script src="{{ asset('mainjs.js') }}"></script>
     </body>
 </html>
 
@@ -168,6 +169,9 @@ $(document).ready( function () {
 
 <script type="text/javascript">
     $(document).ready(function() {
+
+      $('.product_search').select2();
+
         $('#employee_add').submit(function(e) {
             e.preventDefault();
 
@@ -307,125 +311,6 @@ $(document).ready( function () {
           return !isNaN(date.getTime());
       }
  </script>
-<script type="text/javascript">
-  $(document).ready(function() {
-    // Handle form submission for saving and updating
-    $('#category_save').on('submit', function(e) {
-      e.preventDefault();
-
-      // Collect form data
-      var category_id = $('#category_id').val();
-      var category_name = $('#category_name').val();
-      var category_status = $('#category_status').val();
-      var url = category_id ? '/category/' + category_id : '/category';
-      var method = category_id ? 'PUT' : 'POST';
-
-      // Client-side validation
-      if (category_name.length < 3) {
-        toastr.warning('Category name must be at least 3 characters long');
-        return;
-      }
-
-      if (!category_status) {
-        toastr.warning('Status is required');
-        return;
-      }
-
-      // Check if category_id has a value before update
-      if (category_id && method === 'PUT') {
-        $.ajax({
-          url: category_id ? '/category/' + category_id : '/category',
-          type: method,
-          data: $(this).serialize(),
-          success: function(response) {
-            toastr.success('Data updated successfully!');
-            $("#product_list").load(location.href + " #product_list");
-            $('#category_save')[0].reset();
-            $('#category_id').val('');
-          },
-          error: function(xhr, status, error) {
-            toastr.error('Error updating category! Try again.');
-          }
-        });
-      } else {
-        $.ajax({
-          url: '/category',
-          type: 'POST',
-          data: $(this).serialize(),
-          success: function(response) {
-            var result = JSON.parse(response);
-              if (result == 201) {
-                $("#product_list").load(location.href + " #product_list");
-                $('#category_save')[0].reset();
-                toastr.success('Data save successfully!');
-              } else if (result == 200) {
-                toastr.warning('Ops');
-              }    
-          },
-          error: function(xhr, status, error) {
-            toastr.error('Error saving data! Try again.');
-          }
-        });
-      }
-    });
-
-    // Handle delete functionality
-    $(document).on('click', '.delete-btn', function() {
-      var category_id = $(this).data('id');
-
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to undo this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then((result) => {
-        if (result.isConfirmed) {
-          $.ajax({
-            url: '/category/' + category_id,
-            type: 'DELETE',
-            data: {
-              _token: '{{ csrf_token() }}',
-              category_id: category_id
-            },
-            success: function(response) {
-              var result = JSON.parse(response);
-              if (result == 201) {
-                $("#product_list").load(location.href + " #product_list");
-                toastr.success('Data deleted successfully!');
-              } else if (result == 200) {
-                toastr.warning('Data is attached to a product');
-              }
-            },
-            error: function(xhr, status, error) {
-              toastr.error('Error deleting item! Try again');
-            }
-          });
-        }
-      });
-    });
-
-    // Handle edit functionality
-    $(document).on('click', '.edit-btn', function() {
-      var category_id = $(this).data('id');
-
-      $.ajax({
-        url: '/category/' + category_id + '/edit',
-        type: 'GET',
-        success: function(response) {
-          $('#category_id').val(response.category.category_id);
-          $('#category_name').val(response.category.category_name);
-          $('#category_status').val(response.category.status).trigger('change');
-        },
-        error: function(xhr, status, error) {
-          toastr.error('Error fetching data! Try again.');
-        }
-      });
-    });
-  });
-</script>
   <script>
     // Handle delete functionality
     $(document).on('click', '.product_delete_btn', function() {
@@ -442,7 +327,7 @@ $(document).ready( function () {
       }).then((result) => {
         if (result.isConfirmed) {
           $.ajax({
-            url: '/products/' + product_id,
+            url: '/product/' + product_id,
             type: 'DELETE',
             data: {
               _token: '{{ csrf_token() }}',
@@ -470,7 +355,7 @@ $(document).ready( function () {
       var product_id = $(this).data('id');
 
       $.ajax({
-        url: '/products/' + product_id + '/edit',
+        url: '/product/' + product_id + '/edit',
         type: 'GET',
         success: function(response) {
           $('#product_id').val(response.product.product_id)[0];
@@ -489,4 +374,106 @@ $(document).ready( function () {
         }
       });
     });
+
+
+    $('#product_save').on('submit', function(e) {
+      e.preventDefault();
+
+      // Collect form data
+      var product_id = $('#product_id').val();
+      var product_name = $('#product_name').val();
+      var product_description = $('#product_description').val();
+      var manufacturer = $('#manufacturer').val();
+      var category = $('#category').val();
+      var sales_type = $('#sales_type').val();
+      var expirable = $('#expirable').val();
+      var stockable = $('#stockable').val();
+      var status = $('#status').val();
+
+      var url = product_id ? '/product/' + product_id : '/product';
+      var method = product_id ? 'PUT' : 'POST';
+
+      // Client-side validation
+      if(product_name.length < 3) {
+          toastr.warning('Product name must be at least 3 characters long');
+        return;
+      }
+
+      if (manufacturer.length < 3) {
+        toastr.warning('Manufacturer is required');
+        return;
+      }
+
+      if (!category) {
+        toastr.warning('Category is required.');
+        return;
+      }
+
+      if (!sub_category) {
+        toastr.warning('Sub Category is required.');
+        return;
+      }
+      
+      if (!sales_type) {
+        toastr.warning('Sales Type is required');
+        return;
+      }
+    
+      if (!expirable) {
+        toastr.warning('Expirable is required');
+        return;
+      }
+
+      if (!stockable) {
+        toastr.warning('Stockable is required');
+        return;
+      }
+    
+
+      if (!status) {
+        toastr.warning('Status is required');
+        return;
+      }
+
+
+      // Check if category_id has a value before update
+      if (product_id && method === 'PUT') {
+        $.ajax({
+          url: product_id ? '/product/' + product_id : '/product',
+          type: method,
+          data: $(this).serialize(),
+          success: function(response) {
+            toastr.success('Data updated successfully!');
+            $("#product_list").load(location.href + " #product_list");
+            $('#product_save')[0].reset();
+            $('#product_id').val('');
+          },
+          error: function(xhr, status, error) {
+            toastr.error('Error updating category! Try again.');
+          }
+        });
+      } else {
+        $.ajax({
+          url: '/product',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(response) {
+            var result = JSON.parse(response);
+              if (result == 201) {
+                $("#product_list").load(location.href + " #product_list");
+                $('#product_save')[0].reset();
+                toastr.success('Data save successfully!');
+              } else if (result == 200) {
+                toastr.warning('Ops');
+              }    
+          },
+          error: function(xhr, status, error) {
+            toastr.error('Error saving data! Try again.');
+          }
+        });
+      }
+    });
+
+
+
   </script>

@@ -7,7 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\ProductPrice;
+use App\Models\ProductStock;
 use App\Models\Category;
+use Illuminate\Support\Facades\Auth;
 // use Illuminate\Pagination\Paginator;
 // use Illuminate\View\View;
 
@@ -32,40 +34,64 @@ class ProductController extends Controller
     public function create()
     {
         $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
+
         $products = Product::rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id')
         ->where('product.archived', 'No')
+        ->where('product.is_new', '1')
         ->select('product.product_id','product.product_name','product.added_date','product.status' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
         ->orderBy('product.added_date', 'asc') 
         ->paginate(5);
+
+        $product = Product::rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id')
+        ->where('product.archived', 'No')
+        // ->where('product.is_new', '1')
+        ->select('product.product_id','product.product_name','product.added_date','product.status' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
+        ->orderBy('product.added_date', 'asc') 
+        ->paginate(5);
+        // ->get();
 
         return view('product.create', compact('category', 'products'));
     }
 
     public function store(Request $request)
     {
-        // $image_path = '';
+        $validated_data = $request->validate([
+            'product_name' => 'required|min:3|max:50',
+            'product_description' => 'nullable',
+            'manufacturer' => 'required',
+            'category' => 'required',
+            'sub_category' => 'nullable',
+            'sales_type' => 'required',
+            'expirable' => 'required',
+            'stockable' => 'required',
+            'status' => 'required|min:3|max:50',
+        ]); 
 
-        // if ($request->hasFile('image')) {
-        //     $image_path = $request->file('image')->store('products', 'public');
-        // }
+        $existing_product = Product::where('product_name', $request->input('product_name')) ->first();
+       
+        if ($existing_product)
+        {
+            return 200;
+         }
 
-        $product = Product::create([
-            'product_name' => $request->product_name,
-            'category_id' => $request->category_id,
-            // 'image' => $image_path,
-            // 'barcode' => $request->barcode,
-            'stocked' => $request->price,
-            'expirable' => $request->quantity,
-            'user_id' => $request->user_id,
-            'status' => $request->status,
-            'added_date' => $request->added_date,
-            'status' => $request->status
-        ]);
+        $pro_id = $this->product_id($request);         
+        $product = new Product();
+        $product->product_id = $pro_id;
+        $product->product_name = $request->input('product_name');
+        $product->description = $request->input('product_description');
+        $product->manufacturer = $request->input('manufacturer');
+        $product->category_id = $request->input('category');
+        $product->sales_type = $request->input('sales_type');
+        $product->expirable = $request->input('expirable');
+        $product->stocked = $request->input('stockable');
+        $product->status = $request->input('status');
+        $product->added_date = now();
+        $product->user_id =  Auth::user()->user_id;
+        $product->added_by =  Auth::user()->fullname;
+        $product->added_id =  Auth::user()->user_id;
+        $product->save();
 
-        if (!$product) {
-            return redirect()->back()->with('error', 'Sorry, Something went wrong while creating product.');
-        }
-        return redirect()->route('products.index')->with('success', 'Success, New product has been added successfully!');
+        return 201;
     }
 
     private function product_id(Request $request)
@@ -89,40 +115,42 @@ class ProductController extends Controller
 
     public function show($product_id)
     {
-        $product = Product::findOrFail($product_id);
-        $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
-
-        // return view('product.show', compact('invoice','sales'));
+         
     }
 
     public function edit($product_id)
     {
         $product = Product::find($product_id);
-        // $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
-        // $category = Category::where('archived', 'No')->where('status', '=','Active')->get();
-        // $product = Product::rightJoin('product_category', 'product_category.category_id', '=', 'product.category_id')
-        // ->where('product.archived', 'No')
-        // ->where('product.product_id', $product_id)
-        // ->select('product.product_id','product.product_name','product.added_date','product.status' ,'product.stocked','product.expirable','product_category.category_id as pro_id', 'product_category.category_name as category')
-        // ->orderBy('product.added_date', 'asc') 
-        // ->get();
         return response()->json(['product'=> $product]);
-
-        // return view('category.edit', compact('category'));
     }
 
     public function update(Request $request, $product_id)
     {
         $request->validate([
-            'product_name' => 'required|min:3|regex:/^[a-zA-Z ]+$/',
+            'product_name' => 'required|string|max:30|min:3',
+            'category' => 'required|string',
+            'product_description' => 'required|string|max:30|min:3',
+            'manufacturer' => 'required|string',
+            'expirable' => 'string',
+            'stockable' => 'string',
+            'sales_type' => 'string',
+            'status' => 'required|string',
         ]);
 
-        $product = Category::findOrFail($product_id);
-        $product->name = $request->name;
-        // $category->slug = str_slug($request->name);
-        $product->save();
+        $product = Product::findOrFail($product_id);
+        $product->product_name = $request->input('product_name');
+        $product->category_id = $request->input('category');
+        $product->description = $request->input('product_description');
+        $product->manufacturer = $request->input('manufacturer');
+        $product->expirable = $request->input('expirable');
+        $product->stocked = $request->input('stockable');
+        $product->sales_type = $request->input('sales_type');
+        $product->updated_by =  Auth::user()->user_id;
+        $product->updated_date = now();
+        $product->status = $request->input('status');
+        $product->update($request->all());
 
-        return redirect()->back()->with('message', 'Category updated successfully!');
+        return 201;
     }
 
     public function destroy(Request $request)
@@ -132,10 +160,10 @@ class ProductController extends Controller
         'product_id' => 'required',
     ]);
         
-        $used_product_price = ProductPrice::where('product_id', $request->input('product_id')) ->first();
-        $used_product_stock = ProductPrice::where('product_id', $request->input('product_id')) ->first();
+        $prices = ProductPrice::where('product_id', $request->input('product_id')) ->first();
+        $stocks = ProductStock::where('product_id', $request->input('product_id')) ->first();
         
-        if($used_product_stock || $used_product_price)
+        if($stocks || $prices)
         {
             return 200;
         }
@@ -144,34 +172,6 @@ class ProductController extends Controller
         return 201;
 
     }
-
-
-    // public function update(Request $request)
-    // {
-        // $product->name = $request->name;
-        // $product->description = $request->description;
-        // $product->barcode = $request->barcode;
-        // $product->price = $request->price;
-        // $product->quantity = $request->quantity;
-        // $product->status = $request->status;
-
-        // if ($request->hasFile('image')) {
-        //     // Delete old image
-        //     if ($product->image) {
-        //         Storage::delete($product->image);
-        //     }
-        //     // Store image
-        //     $image_path = $request->file('image')->store('products', 'public');
-        //     // Save to Database
-        //     $product->image = $image_path;
-        // }
-
-        // if (!$product->save()) {
-        //     return redirect()->back()->with('error', 'Sorry, Something went wrong while updating product.');
-        // }
-        // return redirect()->route('products.index')->with('success', 'Success, Product has been updated.');
-    // }
-
     
 
     public function prices()

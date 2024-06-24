@@ -122,7 +122,7 @@
           </a>
         </li>
          <li class="menu-item">
-          <a href="{{ url('products') }}" class="menu-link">
+          <a href="{{ url('product') }}" class="menu-link">
             <div class="text-truncate" data-i18n="List">Product</div>
           </a>
         </li>

@@ -67,7 +67,7 @@ Route::middleware('auth')->group(function () {
         // Route::post('category', [ProductCategoryController::class, 'store'])->name('category.store'); //save 
         // Route::delete('category', [ProductCategoryController::class, 'destroy'])->name('category.destroy'); //delete 
         Route::resource('category', ProductCategoryController::class);
-        Route::resource('products', ProductController::class);
+        Route::resource('product', ProductController::class);
 
 });
 

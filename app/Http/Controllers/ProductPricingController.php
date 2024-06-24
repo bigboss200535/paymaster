@@ -10,7 +10,7 @@ class ProductPricingController extends Controller
 {
     public function index()
     {
-        $product_prices = Product::rightJoin('product_price', 'product_price.product_id', '=', 'product.product_id')
+        $prices = Product::rightJoin('product_price', 'product_price.product_id', '=', 'product.product_id')
         ->where('product.archived', 'No')
         ->select('product.product_id','product.product_name', 'product_price.added_date','product_price.status', 
         'product_price.batch_number' ,'product_price.cost_price', 'product_price.wholesale_price', 'product_price.retail_price', 
@@ -19,7 +19,10 @@ class ProductPricingController extends Controller
         ->orderBy('product_price.added_date', 'asc') 
         ->get();
 
-        return view('product.price', compact('product_prices'));
+        $products = Product::where('archived', 'No')->where('status', '=','Active')->get();
+        
+
+        return view('product.price', compact('products', 'prices'));
     }
 
     public function create()
