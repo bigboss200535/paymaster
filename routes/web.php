@@ -55,10 +55,10 @@ Route::middleware('auth')->group(function () {
         Route::get('/dashboard', [GeneralController::class, 'dashboard']); //display dashboard
         
         // Route::get('/products', [ProductController::class, 'index']); 
-        Route::get('/prices', [ProductPricingController::class, 'index']); 
+       
         Route::get('/purchases', [ProductController::class, 'purchases']);  //list purchases
         Route::get('/sales', [SalesController::class, 'index']);  //list sales
-        Route::get('/add-product', [ProductController::class, 'create']); 
+       
         Route::get('employee/details/{employee_id}', [EmployeeController::class, 'show'])->name('employee.show');
         Route::get('/modify-user', [ProfileController::class, 'viewedit']); //fetch modify
         Route::get('/password-change', [ProfileController::class, 'editpassword']); //fetch users
@@ -67,7 +67,11 @@ Route::middleware('auth')->group(function () {
         // Route::post('category', [ProductCategoryController::class, 'store'])->name('category.store'); //save 
         // Route::delete('category', [ProductCategoryController::class, 'destroy'])->name('category.destroy'); //delete 
         Route::resource('category', ProductCategoryController::class);
+        Route::get('/add-product', [ProductController::class, 'create']); 
         Route::resource('product', ProductController::class);
+        Route::get('add-price', [ProductPricingController::class, 'index']); 
+        Route::resource('price', ProductPricingController::class); 
+        
 
 });
 

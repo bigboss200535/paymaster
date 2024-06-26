@@ -30,19 +30,37 @@ class ProductPricingController extends Controller
 
     }
 
-    public function store()
+    public function store(Request $request)
     {
-
+        $validate_data = $request->validate([
+            'product_id' => 'required|min:3|max:50',
+            'pricing_category' => 'nullable',
+            'batch_number' => 'nullable',
+            'cost_price' => 'nullable',
+            'distribution_price' => 'nullable',
+            'wholesale_price' => 'nullable',
+            'retail_price' => 'nullable',
+            'effective_date' => 'nullable',
+            'end_date' => 'nullable',
+            'status' => 'required|min:3|max:50',
+            // 'sub_category' => 'nullable',
+            // 'sales_type' => 'required',
+            // 'expirable' => 'required',
+            // 'stockable' => 'required',
+           
+        ]); 
     }
 
-    public function show()
+    public function show($product_id)
     {
-
+        $product = Product::find($product_id);
+        return response()->json(['product'=> $product]);
     }
 
-    public function edit()
+    public function edit($product_id)
     {
-
+        $product = Product::find($product_id);
+        return response()->json(['product'=> $product]);  
     }
 
     public function update()

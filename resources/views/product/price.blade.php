@@ -28,6 +28,7 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="product_name">Product Name</label>
+                   <input type="text" class="form-control" name="product_id" id="product_id" hidden>
                    <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name">
           </div>
           <div class="row mb-3">
@@ -36,17 +37,17 @@
               <input type="number" class="form-control" id="cost_price" name="cost_price" placeholder="0.00" >
             </div>
             <div class="col">
-              <label class="form-label" for="manufacturer">Selling Price</label>
+              <label class="form-label" for="selling_price">Selling Price</label>
               <input type="number" class="form-control" id="selling_price" name="selling_price" placeholder="0.00">
             </div>
           </div>
           <div class="row mb-3">
             <div class="col">
-              <label class="form-label" for="category">Distribution Price</label>
+              <label class="form-label" for="distribution_price">Distribution Price</label>
               <input type="text" class="form-control" id="distribution_price" name="distribution_price" placeholder="0.00">
             </div>
             <div class="col">
-              <label class="form-label" for="sub_category"> Wholesale Price</label>
+              <label class="form-label" for="wholesale_price"> Wholesale Price</label>
               <input type="text" class="form-control" id="wholesale_price" name="wholesale_price" placeholder="0.00">
             </div>
           </div>
@@ -84,7 +85,7 @@
   </form>
   </div>
 </div>
-<br>
+  <br>
       <div class="app-ecommerce-category">
                   <div class="card">
                     <div class="card-datatable table-responsive">
@@ -171,6 +172,5 @@
                     </div>
                   </div>   
              </div>
-</div>   
-        
+ </div>   
 </x-app-layout>

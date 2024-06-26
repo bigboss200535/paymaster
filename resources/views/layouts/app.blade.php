@@ -34,7 +34,6 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/spinkit/spinkit.css') }}" />
     <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" rel="stylesheet"/>
-   
     <script src="{{ asset('vendor/js/helpers.js') }}"></script>
     <script src="{{ asset('vendor/js/template-customizer.js') }}"></script>
     <script src="{{ asset('js/config.js') }}"></script>
@@ -43,47 +42,8 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.all.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/sweetalert2@11.10.6/dist/sweetalert2.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    
+    <link rel="stylesheet" href="{{ asset('preloader.css') }}">
     </head>
-    <style>
-            .preloader-container {
-              display: none; /* Initially hide the preloader */
-              position: fixed;
-              top: 0;
-              left: 0;
-              width: 100%;
-              height: 100%;
-              background-color: rgba(255, 255, 255, 0.3); /* Transparent background */
-              display: flex;
-              justify-content: center;
-              align-items: center;
-              z-index: 9999;
-            }
-
-            .preloader {
-              font-family: Arial, sans-serif;
-              font-size: 24px;
-              font-weight: bold;
-              color: #333; /* Change the color as needed */
-            }
-
-            .preloader span {
-              display: inline-block;
-              animation: preloader-anim 2s infinite ease-in-out;
-            }
-
-            @keyframes preloader-anim {
-              0% {
-                transform: scale(1);
-              }
-              50% {
-                transform: scale(1.2);
-              }
-              100% {
-                transform: scale(1);
-              }
-            }
-</style>
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
@@ -99,16 +59,15 @@
                     <div class="content-wrapper">
             
                             <!-- Content -->
-                            
                                 {{ $slot }}
-                            
                              <!-- / Content -->
+
                               <!-- Footer -->
                              @include('layouts.footer')
                             <!-- / Footer -->
                        <div class="content-backdrop fade"></div>
                     </div>
-                                <!-- Content wrapper -->
+                    <!-- Content wrapper -->
             </div>
            <!-- / Layout page -->
       </div>
@@ -156,21 +115,26 @@
 <script type="text/javascript">
      $(document).ready( function () {
         $('#users_list').DataTable();
-});
-
-$(document).ready( function () {
         $('#employee_details').DataTable();
+        $('#product_list').DataTable();
+
+        $('.product_search').select2();
+
 });
 
 $(document).ready( function () {
-        $('#product_list').DataTable();
+        // $('#employee_details').DataTable();
+});
+
+$(document).ready( function () {
+        // $('#product_list').DataTable();
 });
 </script>
 
 <script type="text/javascript">
     $(document).ready(function() {
 
-      $('.product_search').select2();
+      // $('.product_search').select2();
 
         $('#employee_add').submit(function(e) {
             e.preventDefault();
@@ -477,3 +441,33 @@ $(document).ready( function () {
 
 
   </script>
+
+<script>
+  $(document).on('change', '#product_search', function() {
+    var product_id = $(this).val(); // Get the selected product ID from the dropdown
+
+    $.ajax({
+      url: '/price/' + product_id,
+      // url: '/product/' + product_id + '/edit',
+      // url: '/price', // Assuming '/price/{product_id}' is your route for fetching product details
+      type: 'GET',
+      success: function(response) {
+        $('#product_id').val(response.product.product_id); // Update product ID input field
+        $('#product_name').val(response.product.product_name); // Update product name input field
+        // $('#cost_price').val(response.product.cost_price); // Update cost price input field
+        // $('#selling_price').val(response.product.selling_price); // Update selling price input field
+        // $('#distribution_price').val(response.product.distribution_price); // Update distribution price input field
+        // $('#wholesale_price').val(response.product.wholesale_price); // Update wholesale price input field
+        // $('#effective_date').val(response.product.effective_date); // Update effective date input field
+        // $('#end_date').val(response.product.end_date); // Update end date input field
+        // $('#status').val(response.product.status).trigger('change'); // Update status select field
+
+        // Optionally, trigger any other necessary updates or actions based on response
+      },
+      error: function(xhr, status, error) {
+        toastr.error('Error fetching data! Try again.'); // Display error message if AJAX request fails
+      }
+    });
+  });
+</script>
+
