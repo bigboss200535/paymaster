@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ProductPrice;
 
 class ProductPricingController extends Controller
 {
@@ -53,7 +54,9 @@ class ProductPricingController extends Controller
 
     public function show($product_id)
     {
+        $product = ProductPrice::find($product_id);
         $product = Product::find($product_id);
+
         return response()->json(['product'=> $product]);
     }
 
