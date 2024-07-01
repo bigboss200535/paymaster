@@ -400,7 +400,7 @@ $(document).ready( function () {
       }
 
 
-      // Check if category_id has a value before update
+      // Check if product_id has a value before update
       if (product_id && method === 'PUT') {
         $.ajax({
           url: product_id ? '/product/' + product_id : '/product',
@@ -443,31 +443,104 @@ $(document).ready( function () {
   </script>
 
 <script>
-  $(document).on('change', '#product_search', function() {
-    var product_id = $(this).val(); // Get the selected product ID from the dropdown
+$('#price_save').on('submit', function(e) {
+      e.preventDefault();
+      // Collect form data
+      var product_id = $('#product_id').val();
+      var cost_price = $('#cost_price').val();
+      var selling_price = $('#selling_price').val();
+      var distribution_price = $('#distribution_price').val();
+      var wholesale_price = $('#wholesale_price').val();
+      var effective_date = $('#effective_date').val();
+      var end_date = $('#end_date').val();
+      var status = $('#status').val();
 
-    $.ajax({
-      url: '/price/' + product_id,
-      // url: '/product/' + product_id + '/edit',
-      // url: '/price', // Assuming '/price/{product_id}' is your route for fetching product details
-      type: 'GET',
-      success: function(response) {
-        $('#product_id').val(response.product.product_id); // Update product ID input field
-        $('#product_name').val(response.product.product_name); // Update product name input field
-        // $('#cost_price').val(response.product.cost_price); // Update cost price input field
-        // $('#selling_price').val(response.product.selling_price); // Update selling price input field
-        // $('#distribution_price').val(response.product.distribution_price); // Update distribution price input field
-        // $('#wholesale_price').val(response.product.wholesale_price); // Update wholesale price input field
-        // $('#effective_date').val(response.product.effective_date); // Update effective date input field
-        // $('#end_date').val(response.product.end_date); // Update end date input field
-        // $('#status').val(response.product.status).trigger('change'); // Update status select field
+      // var url = product_id ? '/product/' + product_id : '/product';
+      // var method = product_id ? 'PUT' : 'POST';
 
-        // Optionally, trigger any other necessary updates or actions based on response
-      },
-      error: function(xhr, status, error) {
-        toastr.error('Error fetching data! Try again.'); // Display error message if AJAX request fails
+      // Client-side validation
+      if(!cost_price) {
+          toastr.warning('Cost price is needed');
+        return;
       }
+
+      if (!selling_price) {
+        toastr.warning('Selling price is require');
+        return;
+      }
+
+      if (!wholesale_price) {
+        toastr.warning('Wholesale price is required.');
+        return;
+      }
+      
+      // Check if product_id has a value before update
+      // if (product_id && method === 'PUT') {
+      //   $.ajax({
+      //     url: product_id ? '/price/' + product_id : '/price',
+      //     type: method,
+      //     data: $(this).serialize(),
+      //     success: function(response) {
+      //       toastr.success('Data updated successfully!');
+      //       $("#product_list").load(location.href + " #product_list");
+      //       $('#product_save')[0].reset();
+      //       $('#product_id').val('');
+      //     },
+      //     error: function(xhr, status, error) {
+      //       toastr.error('Error updating category! Try again.');
+      //     }
+      //   });
+      // } else {
+        $.ajax({
+          url: '/price',
+          type: 'POST',
+          data: $(this).serialize(),
+          success: function(response) {
+            var result = JSON.parse(response);
+              if (result == 201) {
+                $("#product_list").load(location.href + " #product_list");
+                $('#price_save')[0].reset();
+                toastr.success('Data save successfully!');
+              } else if (result == 200) {
+                // toastr.warning('Ops');
+                $("#product_list").load(location.href + " #product_list");
+                $('#price_save')[0].reset();
+                toastr.success('Data Updated successfully!');
+              }    
+          },
+          error: function(xhr, status, error) {
+            toastr.error('Error saving data! Try again.');
+          }
+        });
+      // }
     });
-  });
+
+    $(document).on('change', '#product_search', function() {
+      var product_id = $(this).val(); // Get the selected product ID from the dropdown
+  
+      $.ajax({
+        url: '/price/' + product_id,
+      
+        type: 'GET',
+        success: function(response) {
+          $('#price_id').val(response.product.pp_id); // Update product ID input field
+          $('#product_id').val(response.product.product_id); // Update product ID input field
+          $('#product_name').val(response.product.product_name); // Update product name input field
+          $('#cost_price').val(response.product.cost_price); // Update cost price input field
+          $('#selling_price').val(response.product.retail_price); // Update selling price input field
+          $('#distribution_price').val(response.product.distribution_price); // Update distribution price input field
+          $('#wholesale_price').val(response.product.wholesale_price); // Update wholesale price input field
+          $('#effective_date').val(response.product.effective_date); // Update effective date input field
+          $('#end_date').val(response.product.end_date); // Update end date input field
+          $('#status').val(response.product.status).trigger('change'); // Update status select field
+  
+          // Optionally, trigger any other necessary updates or actions based on response
+        },
+        error: function(xhr, status, error) {
+          toastr.error('Error fetching data! Try again.'); // Display error message if AJAX request fails
+        }
+      });
+    });
+
 </script>
 

@@ -15,7 +15,7 @@
           <h5 class="card-tile mb-0">Product information</h5>
         </div>
         <div class="card-body">
-          <form id="product_save" enctype="multipart/form-data" method="post"> 
+          <form id="price_save" enctype="multipart/form-data" method="post"> 
             @csrf
           <div class="mb-3">
             <label class="form-label" for="product_name">Search Product</label>
@@ -28,8 +28,9 @@
           </div>
           <div class="mb-3">
             <label class="form-label" for="product_name">Product Name</label>
-                   <input type="text" class="form-control" name="product_id" id="product_id" hidden>
-                   <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name">
+            <input type="text" class="form-control" name="price_id" id="price_id">
+                <input type="text" class="form-control" name="product_id" id="product_id" hidden>
+                <input type="text" class="form-control" name="product_name" id="product_name" placeholder="Product Name">
           </div>
           <div class="row mb-3">
             <div class="col">
@@ -98,9 +99,9 @@
                             <th>Sn</th>
                             <th>Product</th>
                             <th>Categories</th>
-                            <th>Barcode</th>
-                            <th class="text-nowrap text-sm-end">Stocked &nbsp;</th>
-                            <th class="text-nowrap text-sm-end">Expirable</th>
+                            <th>Retail Price</th>
+                            <th class="text-nowrap text-sm-end">Effective Date &nbsp;</th>
+                            <th class="text-nowrap text-sm-end">End Date</th>
                             <th>Status</th>
                             <th class="text-lg-center">Actions</th>
                           </tr>
@@ -113,9 +114,9 @@
                             <tr>
                               <td>{{ $counter++ }}</td>
                               <td>{{ $product->product_name }}</td>
-                              <td>{{ $product->category }}</td>
+                              <td> {{$product->retail_price}}</td>
                               <td>
-                                  {!! DNS1D::getBarcodeHTML('this_barc', "C128",1.4,22) !!}
+                                 {{$product->retail_price}}
                               </td>
                               <td class="text-nowrap text-sm-end" align="left">
                                 @if($product->stocked === '101')
